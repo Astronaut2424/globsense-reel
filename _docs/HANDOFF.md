@@ -1,86 +1,78 @@
-# HANDOFF — what's done, what you do, what each worker does
+# HANDOFF — two-phase workflow (creative → deploy)
 
-## ✅ Done by orchestrator (this session)
+## The split
 
-- Scaffold built: `/opt/data/home/globsense/prototypes/globsense-reel/`
-- 12 project folders with placeholder `index.html` + `_status.json`
-- Master gallery at `index.html` (auto-reads manifest, shows status per project)
-- Shared design tokens at `_shared/tokens.css` (cinematic dark register)
-- Concept stamp at `_shared/concept-stamp.html` (for real-brand projects)
-- Brief contract at `_docs/brief-contract.md` (the done-bar)
-- 12 ready-to-paste session prompts at `_docs/session-prompts/NN-slug.md`
-- `deploy.sh` with status/url/push/init commands
-- Git initialized, 2 commits
-- nginx symlink: `/opt/data/home/globsense-reel-www → globsense-reel/`
+Each project = 2 sessions:
+1. **Creative session** (premium model) → generates code only
+2. **Deploy session** (cheap model) → tests, pushes, ships
 
-## 🔴 You do — one screen of one-time setup
+Why: premium tokens spent on taste, not on mechanical git/curl/JSON work.
 
-### 1. GitHub auth (one of two ways)
+## ✅ Done by orchestrator
 
-**(a) Interactive — recommended:**
-```bash
-/opt/data/home/bin/gh auth login
-# pick: GitHub.com → HTTPS → login with browser
-# paste the device code it gives you into https://github.com/login/device
-```
+- Scaffold: 12 project folders, shared tokens, concept stamp
+- 12 creative prompts: `_docs/session-prompts/NN-slug.md`
+- 1 deploy prompt: `_docs/session-prompts/deploy/DEPLOY-UNIVERSAL.md`
+- `deploy.sh`, manifest sync, Vercel fallback doc
+- Git initialized, 5 commits
 
-**(b) Token paste:**
-```bash
-echo "YOUR_GH_PAT_HERE" | /opt/data/home/bin/gh auth login --with-token
-```
+## 🔴 You do — one-time setup
 
-### 2. Create the public repo + first push
+### 1. GitHub auth (IN PROGRESS — authorize now)
+Go to https://github.com/login/device → enter: **00FC-2079**
 
+### 2. Create repo + first push (after auth)
 ```bash
 cd /opt/data/home/globsense/prototypes/globsense-reel
 /opt/data/home/bin/gh repo create astronaut2424/globsense-reel \
-  --public --source=. --push --description "Globsense Reel — 12 AI-native prototypes from Shanghai"
+  --public --source=. --push --description "Globsense Reel — 12 AI-native prototypes"
 ```
 
-### 3. Mount /reel/ in nginx (one PowerShell paste on Windows host)
+### 3. Mount /reel/ in nginx
+Paste the block from `_docs/nginx-mount.md` into Windows PowerShell.
 
-Open Windows PowerShell as admin and paste the entire block in
-`_docs/nginx-mount.md`.
+## 🟢 You do — per-project workflow
 
-After: `curl http://localhost:8888/reel/` should return the gallery HTML
-locally, and `https://<natapp-domain>.natappfree.cc/reel/` works globally.
+### Phase 1: Creative (12 sessions, one per project)
 
-Find current natapp domain:
-```bash
-cd /opt/data/home/globsense/prototypes/globsense-reel && ./deploy.sh url
-```
+| # | Project | Model | File |
+|---|---------|-------|------|
+| 01 | GaaS Platform | claude-opus-4-7 | `01-gaas.md` |
+| 02 | Reel Engine | gpt-5.3-codex | `02-reel-engine.md` |
+| 03 | Mingxi | claude-sonnet-4-6-thinking | `03-mingxi.md` |
+| 04 | Linfen | gemini-3-pro-preview | `04-linfen.md` |
+| 05 | Ostraka | gpt-5.5 | `05-ostraka.md` |
+| 06 | Stratum | gpt-5.4-pro | `06-stratum.md` |
+| 07 | Ink Garden | gpt-5-mini | `07-ink-garden.md` |
+| 08 | Tea Leaves | gemini-2.5-flash | `08-tea-leaves.md` |
+| 09 | DJI spec | grok-4.1 | `09-dji-spec.md` |
+| 10 | BYD spec | gpt-5.4 | `10-byd-spec.md` |
+| 11 | Pop Mart spec | gpt-5.2-codex | `11-popmart-spec.md` |
+| 12 | HEYTEA spec | gemini-2.5-pro | `12-heytea-spec.md` |
 
-## 🟢 You do — 12 build sessions
+For each:
+1. Open new WebUI session
+2. Set model (from table) in dropdown under `openai-next`
+3. Open `_docs/session-prompts/NN-slug.md`, copy, paste as message #1
+4. Worker generates code + `_brief.md` + marks `needs_deploy: true`
+5. Session ends — no deployment
 
-Open a new WebUI session per project. For each:
+### Phase 2: Deploy (1 session handles ALL, or 1 per project)
 
-1. Set model to `claude-opus-4-7` (from `openai-next` provider) in the WebUI
-   dropdown.
-2. Open the matching prompt file:
-   `/opt/data/home/globsense/prototypes/globsense-reel/_docs/session-prompts/NN-slug.md`
-3. Copy entire file content, paste as message #1 of the new session.
-4. Let the worker build. It will write to its assigned folder, push to
-   GitHub itself when done, and self-update `_status.json`.
+1. Open new WebUI session
+2. Set model to a **cheap Chinese model**: `deepseek-v4-flash` or `glm-5.2`
+   (NOT openai-next — save those credits)
+3. Open `_docs/session-prompts/deploy/DEPLOY-UNIVERSAL.md`, copy, paste
+4. Cheap model finds all `needs_deploy: true` projects, tests, pushes,
+   updates status, reports URLs
 
-Each worker session handles its own:
-- Build into its folder
-- Self-deploy via GitHub push (if Vercel path is needed for heavy WebGL,
-  the worker will use it instead — see `_docs/vercel-fallback.md`)
-- Status update
-
-You don't need to come back here unless something breaks or you want a
-status snapshot:
-
+**Or**: deploy from THIS orchestrator session anytime:
 ```bash
 cd /opt/data/home/globsense/prototypes/globsense-reel && ./deploy.sh status
 ```
 
-## When things go wrong
+## Status check anytime
 
-| Symptom | Fix |
-|---|---|
-| Worker can't push to GitHub | Worker should report it; you run `gh auth status`, re-auth if needed, then worker re-pushes |
-| nginx 404 on `/reel/` | Re-run the PowerShell paste from `nginx-mount.md` |
-| natapp URL changed | Run `./deploy.sh url` for current domain |
-| Project has heavy WebGL and natapp is slow | Worker should switch to Vercel — see `vercel-fallback.md` |
-| Manifest out of sync with reality | `python3 _docs/sync-manifest.py` (orchestrator-run) |
+```bash
+cd /opt/data/home/globsense/prototypes/globsense-reel && ./deploy.sh status
+```
