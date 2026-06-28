@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Project Status",
+  "type": "object",
+  "required": ["status", "worker_model", "updated_at"],
+  "properties": {
+    "status": {"enum": ["pending", "building", "built", "approved", "shipped", "revising"]},
+    "worker_model": {"type": ["string", "null"], "description": "e.g. claude-opus-4-7"},
+    "session_url": {"type": ["string", "null"]},
+    "updated_at": {"type": "string", "format": "date-time"},
+    "build_time_seconds": {"type": ["number", "null"]},
+    "notes": {"type": "string"},
+    "needs_review": {"type": "boolean"},
+    "review_passed": {"type": ["boolean", "null"]},
+    "reviewer_notes": {"type": "string"}
+  }
+}

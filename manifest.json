@@ -1,0 +1,21 @@
+{
+  "name": "globsense-reel",
+  "tagline": "Shanghai is the applied AI capital. This is the reel.",
+  "build_date": "2026-06-28",
+  "natapp_url_base": "https://t9a624a5.natappfree.cc/reel/",
+  "github_pages_url": "https://astronaut2424.github.io/globsense-reel/",
+  "projects": [
+    {"n": 1,  "slug": "lab",          "name": "Globsense Lab",       "kind": "studio-ip",       "real": false, "status": "pending", "model": null, "tagline": "An experimental playground of AI-native micro-tools."},
+    {"n": 2,  "slug": "reel-engine",  "name": "Globsense Reel Engine","kind": "studio-ip",      "real": false, "status": "pending", "model": null, "tagline": "Auto-video pipeline: AI gen + real footage, edited by AI."},
+    {"n": 3,  "slug": "mingxi",       "name": "Mingxi 明溪",         "kind": "fictional",       "real": false, "status": "pending", "model": null, "tagline": "A Chinese tea house, voice-led, opening in Mayfair."},
+    {"n": 4,  "slug": "linfen",       "name": "Linfen 林芬",         "kind": "fictional",       "real": false, "status": "pending", "model": null, "tagline": "AI dermatologist generates your custom serum, label, and story."},
+    {"n": 5,  "slug": "ostraka",      "name": "Ostraka",             "kind": "fictional",       "real": false, "status": "pending", "model": null, "tagline": "Generative-art gallery. AI × human, minted and exhibited."},
+    {"n": 6,  "slug": "stratum",      "name": "Stratum",             "kind": "fictional",       "real": false, "status": "pending", "model": null, "tagline": "The video-gen inference layer for the next decade of cinema."},
+    {"n": 7,  "slug": "ink-garden",   "name": "Ink Garden",          "kind": "mini-game",       "real": false, "status": "pending", "model": null, "tagline": "Drag to paint. AI completes your scroll."},
+    {"n": 8,  "slug": "tea-leaves",   "name": "Tea Leaves",          "kind": "mini-game",       "real": false, "status": "pending", "model": null, "tagline": "Divination, generated. Mingxi universe expansion."},
+    {"n": 9,  "slug": "dji-spec",     "name": "DJI Atelier",         "kind": "real-spec",       "real": true,  "status": "pending", "model": null, "tagline": "A creators' platform for the world's best drone makers."},
+    {"n": 10, "slug": "byd-spec",     "name": "BYD Halo Experience", "kind": "real-spec",       "real": true,  "status": "pending", "model": null, "tagline": "Premium ownership for a fictional BYD halo model."},
+    {"n": 11, "slug": "popmart-spec", "name": "Pop Mart Vault",      "kind": "real-spec",       "real": true,  "status": "pending", "model": null, "tagline": "The collector's vault: 3D shelf, AI hunter, trade graph."},
+    {"n": 12, "slug": "heytea-spec",  "name": "HEYTEA London",       "kind": "real-spec",       "real": true,  "status": "pending", "model": null, "tagline": "London flagship. AI pairings for Western palates."}
+  ]
+}

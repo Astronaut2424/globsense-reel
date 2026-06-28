@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Globsense Reel — 2026</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="_shared/tokens.css">
+<style>
+  body { padding: clamp(40px, 8vw, 120px); max-width: 1400px; margin: 0 auto; }
+  .header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: var(--gap-xl); border-bottom: 1px solid var(--ink-line); padding-bottom: var(--gap-lg); }
+  .header h1 { font-size: var(--t-display); letter-spacing: -0.02em; }
+  .header .meta { font-family: var(--font-mono); font-size: var(--t-small); color: var(--text-d-caption); text-align: right; }
+  .tag { font-family: var(--font-mono); font-size: var(--t-micro); text-transform: uppercase; letter-spacing: 0.15em; color: var(--brand-accent); margin-bottom: var(--gap-md); }
+  .lede { font-family: var(--font-display); font-size: var(--t-h1); color: var(--text-d-title); max-width: 900px; line-height: 1.2; margin-bottom: var(--gap-2xl); }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: var(--gap-md); }
+  .card { display: block; padding: var(--gap-lg); background: var(--ink-1); border: 1px solid var(--ink-line); border-radius: var(--r-md); transition: all var(--dur-base) var(--ease-cinematic); position: relative; min-height: 220px; }
+  .card:hover { background: var(--ink-2); border-color: var(--ink-line-strong); transform: translateY(-2px); }
+  .card .num { font-family: var(--font-mono); font-size: var(--t-micro); color: var(--text-d-caption); letter-spacing: 0.1em; }
+  .card .name { font-family: var(--font-display); font-size: var(--t-h2); color: var(--text-d-title); margin: var(--gap-sm) 0; }
+  .card .tagline { color: var(--text-d-body); font-size: var(--t-small); margin-bottom: var(--gap-lg); }
+  .card .footer { position: absolute; bottom: var(--gap-lg); left: var(--gap-lg); right: var(--gap-lg); display: flex; justify-content: space-between; align-items: center; font-family: var(--font-mono); font-size: var(--t-micro); text-transform: uppercase; letter-spacing: 0.1em; }
+  .card[data-status="pending"] { opacity: 0.45; }
+  .card[data-status="pending"]:hover { transform: none; cursor: default; }
+  .card[data-status="building"] { border-color: var(--brand-accent); }
+  .card[data-status="built"] .status { color: #02B940; }
+  .card[data-status="shipped"] .status { color: var(--brand-accent); }
+  .badge-real { font-size: 10px; padding: 2px 8px; border: 1px solid var(--ink-line); border-radius: var(--r-pill); color: var(--text-d-caption); }
+  footer { margin-top: var(--gap-2xl); padding-top: var(--gap-lg); border-top: 1px solid var(--ink-line); font-family: var(--font-mono); font-size: var(--t-micro); color: var(--text-d-caption); text-transform: uppercase; letter-spacing: 0.15em; display: flex; justify-content: space-between; }
+</style>
+</head>
+<body>
+  <div class="header">
+    <div>
+      <div class="tag">Globsense Reel · 2026</div>
+      <h1>The applied AI capital.</h1>
+    </div>
+    <div class="meta">
+      <div id="meta-date"></div>
+      <div id="meta-count"></div>
+    </div>
+  </div>
+
+  <p class="lede">Twelve studies in what AI-native digital work can be, when the studio sits in Shanghai and reads two cultures at once.</p>
+
+  <div class="grid" id="grid"></div>
+
+  <footer>
+    <span>Globsense · Shanghai</span>
+    <span><a href="https://github.com/astronaut2424/globsense-reel">source</a></span>
+  </footer>
+
+<script>
+fetch('manifest.json').then(r => r.json()).then(m => {
+  document.getElementById('meta-date').textContent = m.build_date;
+  document.getElementById('meta-count').textContent = m.projects.length + ' projects';
+  const grid = document.getElementById('grid');
+  m.projects.forEach(p => {
+    const isClickable = ['built','approved','shipped'].includes(p.status);
+    const num = String(p.n).padStart(2, '0');
+    const href = isClickable ? `${num}-${p.slug}/` : '#';
+    const tag = isClickable ? 'a' : 'div';
+    const el = document.createElement(tag);
+    el.className = 'card';
+    if (isClickable) el.href = href;
+    el.dataset.status = p.status;
+    el.innerHTML = `
+      <div class="num">${num} · ${p.kind.replace('-', ' ')}</div>
+      <div class="name">${p.name}</div>
+      <div class="tagline">${p.tagline}</div>
+      <div class="footer">
+        <span class="status">${p.status}</span>
+        ${p.real ? '<span class="badge-real">Concept · Unaffiliated</span>' : ''}
+      </div>`;
+    grid.appendChild(el);
+  });
+});
+</script>
+</body>
+</html>
