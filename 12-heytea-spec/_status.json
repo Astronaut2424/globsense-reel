@@ -1,9 +1,36 @@
 {
-  "status": "pending",
-  "worker_model": null,
-  "session_url": null,
-  "updated_at": "2026-06-28T12:21:23.799241Z",
-  "build_time_seconds": null,
-  "needs_review": false,
-  "notes": ""
+  "project_id": "12-heytea-spec",
+  "title": "HEYTEA · Soho",
+  "subtitle": "Spec microsite for a London flagship — Monocle-grade editorial",
+  "status": "built",
+  "needs_deploy": true,
+  "model": "kimi-k2.6",
+  "built_at": "2026-06-28",
+  "files": [
+    "index.html",
+    "styles.css",
+    "script.js",
+    "_brief.md"
+  ],
+  "sections": [
+    "concept_stamp",
+    "nav",
+    "hero",
+    "editorial_intro",
+    "menu_8_drinks",
+    "ai_pairing_4_prompts",
+    "space_photo_strip",
+    "reservation",
+    "footer"
+  ],
+  "palette": {
+    "cream": "#fbf7f0",
+    "paper": "#ede7d9",
+    "ink": "#2a2a2a",
+    "cherry": "#c8302a"
+  },
+  "fonts": ["Fraunces", "Inter", "Noto Serif SC"],
+  "responsive": true,
+  "external_dependencies": ["fonts.googleapis.com"],
+  "notes": "Bilingual EN-host / CN-guest. No real HEYTEA brand imagery used. Concept stamp mandatory and present (fixed top-right)."
 }

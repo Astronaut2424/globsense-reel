@@ -1,14 +1,505 @@
-<!doctype html><html><head><meta charset="utf-8"><title>HEYTEA London — pending</title>
-<link rel="stylesheet" href="../_shared/tokens.css">
-<style>body{display:grid;place-items:center;min-height:100vh;text-align:center;padding:40px;}
-h1{font-family:var(--font-display);font-size:var(--t-display);}
-.tag{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.2em;color:var(--brand-accent);}
-.lede{color:var(--text-d-body);max-width:540px;margin:24px auto;}</style>
-</head><body>
-<div>
-<div class="tag">#12 · pending build</div>
-<h1>HEYTEA London</h1>
-<p class="lede">London flagship. AI pairings for Western palates.</p>
-<a class="back-to-reel" href="../">← back to reel</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>HEYTEA · Soho — the tea, the city, the meeting.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=Inter:wght@300;400;500;600&family=Noto+Serif+SC:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<!-- ───────────── CONCEPT STAMP ───────────── -->
+<div class="stamp" aria-hidden="true">
+  <div class="stamp__ring">
+    <span>CONCEPT · UNAFFILIATED · SPEC WORK · GLOBSENSE ·</span>
+  </div>
+  <div class="stamp__core">№ 12</div>
 </div>
-</body></html>
+
+<!-- ───────────── NAV ───────────── -->
+<header class="nav">
+  <div class="nav__brand">
+    <span class="nav__mark">⌬</span>
+    <span class="nav__name">HEYTEA</span>
+    <span class="nav__sep">·</span>
+    <span class="nav__loc">Soho</span>
+  </div>
+  <nav class="nav__links">
+    <a href="#menu">Menu</a>
+    <a href="#pair">Pairing</a>
+    <a href="#space">The Space</a>
+    <a href="#book">Reserve</a>
+  </nav>
+  <div class="nav__meta">
+    <span class="dot"></span>
+    <span>Opening Autumn ’26 — Dean Street, W1</span>
+  </div>
+</header>
+
+<!-- ───────────── HERO ───────────── -->
+<section class="hero">
+  <div class="hero__sky"></div>
+  <div class="hero__grain"></div>
+
+  <div class="hero__caption">
+    <span>Issue 01 / Soho Edition</span>
+    <span>51.5142°N · 0.1326°W</span>
+  </div>
+
+  <div class="hero__cup" aria-hidden="true">
+    <svg viewBox="0 0 200 280" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="cup" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#fbf7f0"/>
+          <stop offset="100%" stop-color="#e9e2d4"/>
+        </linearGradient>
+        <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#c89568"/>
+          <stop offset="100%" stop-color="#8b5a2b"/>
+        </linearGradient>
+      </defs>
+      <!-- steam -->
+      <path d="M85 30 Q75 15 90 5 Q105 20 95 35" stroke="#c8c4ba" stroke-width="2" fill="none" opacity="0.6"/>
+      <path d="M105 35 Q120 20 110 5 Q95 18 110 35" stroke="#c8c4ba" stroke-width="2" fill="none" opacity="0.5"/>
+      <path d="M125 30 Q140 15 130 0 Q115 18 130 35" stroke="#c8c4ba" stroke-width="2" fill="none" opacity="0.4"/>
+      <!-- cup body -->
+      <path d="M40 60 L160 60 L150 250 Q150 270 130 270 L70 270 Q50 270 50 250 Z" fill="url(#cup)" stroke="#2a2a2a" stroke-width="1.5"/>
+      <!-- liquid surface -->
+      <ellipse cx="100" cy="60" rx="60" ry="8" fill="url(#liquid)" stroke="#2a2a2a" stroke-width="1.5"/>
+      <!-- band -->
+      <rect x="45" y="155" width="110" height="22" fill="#c8302a"/>
+      <text x="100" y="171" text-anchor="middle" fill="#fbf7f0" font-family="Inter" font-size="11" font-weight="600" letter-spacing="3">HEYTEA</text>
+      <!-- CN char -->
+      <text x="100" y="220" text-anchor="middle" fill="#2a2a2a" font-family="Noto Serif SC" font-size="34" font-weight="400">茶</text>
+    </svg>
+  </div>
+
+  <div class="hero__title">
+    <div class="hero__eyebrow">A London flagship · 倫敦旗艦店</div>
+    <h1>
+      <span class="hero__en">HEYTEA</span>
+      <span class="hero__dot">·</span>
+      <span class="hero__en">Soho</span>
+    </h1>
+    <div class="hero__cn">喜茶 · 蘇活</div>
+    <p class="hero__tag">the tea, the city, the meeting.</p>
+  </div>
+
+  <div class="hero__foot">
+    <div>
+      <span class="label">Forecast</span>
+      <span class="value">Grey · 12°C · drizzle expected</span>
+    </div>
+    <div>
+      <span class="label">Established</span>
+      <span class="value">Jiangmen ’12 — London ’26</span>
+    </div>
+    <div>
+      <span class="label">Ritual</span>
+      <span class="value">Eight signature pours · daily</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── INTRO STRIP ───────────── -->
+<section class="intro">
+  <div class="intro__rule"></div>
+  <div class="intro__grid">
+    <p class="intro__quote">
+      “Tea did not leave London. London left tea. We came to remind the city
+      what it forgot — that a cup is an occasion, and an occasion is a
+      meeting.”
+    </p>
+    <div class="intro__byline">
+      <span>— Editor’s note</span>
+      <span>Soho, W1</span>
+    </div>
+  </div>
+  <div class="intro__rule"></div>
+</section>
+
+<!-- ───────────── THE MENU ───────────── -->
+<section class="menu" id="menu">
+  <div class="section__head">
+    <span class="section__num">01 / The Menu</span>
+    <h2>Eight pours, one afternoon.</h2>
+    <p>Hover a card. The cup speaks back — ingredients, calories, sweetness,
+       and the drink you already love that brought you here.</p>
+  </div>
+
+  <div class="menu__grid">
+    <!-- Card 1 -->
+    <article class="card" data-sweet="3">
+      <header class="card__head">
+        <span class="card__no">№ 01</span>
+        <span class="card__price">£5.40</span>
+      </header>
+      <h3 class="card__en">Cheese Foam Oolong</h3>
+      <div class="card__cn">芝士烏龍</div>
+      <div class="card__base">
+        <span>Roasted Anxi oolong · sea-salt cream cap</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>oolong, milk, cream cheese, salt</span></div>
+        <div class="row"><span>Calories</span><span>184 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:30%"></i></div>
+        </div>
+        <div class="pair">If you like <b>Aperol Spritz</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="card" data-sweet="4">
+      <header class="card__head">
+        <span class="card__no">№ 02</span>
+        <span class="card__price">£5.80</span>
+      </header>
+      <h3 class="card__en">Many Many Mango</h3>
+      <div class="card__cn">多肉芒芒甘露</div>
+      <div class="card__base">
+        <span>Alphonso mango · sago · pomelo zest</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>mango, sago, pomelo, coconut</span></div>
+        <div class="row"><span>Calories</span><span>262 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:65%"></i></div>
+        </div>
+        <div class="pair">If you like <b>Passionfruit Martini</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="card" data-sweet="2">
+      <header class="card__head">
+        <span class="card__no">№ 03</span>
+        <span class="card__price">£4.90</span>
+      </header>
+      <h3 class="card__en">Jasmine Green, Cold</h3>
+      <div class="card__cn">茉莉冷萃</div>
+      <div class="card__base">
+        <span>Fuzhou jasmine · 12-hour cold draw</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>jasmine green tea, water</span></div>
+        <div class="row"><span>Calories</span><span>4 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:10%"></i></div>
+        </div>
+        <div class="pair">If you like <b>flat white, black</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="card" data-sweet="3">
+      <header class="card__head">
+        <span class="card__no">№ 04</span>
+        <span class="card__price">£5.60</span>
+      </header>
+      <h3 class="card__en">Brown Sugar Boba Milk</h3>
+      <div class="card__cn">波波黑糖鮮奶</div>
+      <div class="card__base">
+        <span>Caramelised muscovado · pearls · whole milk</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>tapioca, brown sugar, milk</span></div>
+        <div class="row"><span>Calories</span><span>298 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:55%"></i></div>
+        </div>
+        <div class="pair">If you like <b>salted caramel mocha</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="card" data-sweet="2">
+      <header class="card__head">
+        <span class="card__no">№ 05</span>
+        <span class="card__price">£5.20</span>
+      </header>
+      <h3 class="card__en">Phoenix Single-Origin</h3>
+      <div class="card__cn">鳳凰單欉</div>
+      <div class="card__base">
+        <span>Dancong, honey-orchid varietal · neat</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>dancong oolong leaves</span></div>
+        <div class="row"><span>Calories</span><span>2 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:15%"></i></div>
+        </div>
+        <div class="pair">If you like <b>natural wine</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 6 -->
+    <article class="card" data-sweet="4">
+      <header class="card__head">
+        <span class="card__no">№ 06</span>
+        <span class="card__price">£6.00</span>
+      </header>
+      <h3 class="card__en">Strawberry Boom</h3>
+      <div class="card__cn">芝芝莓莓</div>
+      <div class="card__base">
+        <span>British strawberries · cheese foam · iced green</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>strawberry, green tea, cream cheese</span></div>
+        <div class="row"><span>Calories</span><span>241 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:60%"></i></div>
+        </div>
+        <div class="pair">If you like <b>Eton mess</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 7 -->
+    <article class="card" data-sweet="1">
+      <header class="card__head">
+        <span class="card__no">№ 07</span>
+        <span class="card__price">£4.60</span>
+      </header>
+      <h3 class="card__en">Pu-erh, Aged 7</h3>
+      <div class="card__cn">七年熟普</div>
+      <div class="card__base">
+        <span>Menghai · earth, fig, damp cedar</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>aged pu-erh leaves</span></div>
+        <div class="row"><span>Calories</span><span>0 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:5%"></i></div>
+        </div>
+        <div class="pair">If you like <b>Islay whisky</b> → try this.</div>
+      </div>
+    </article>
+
+    <!-- Card 8 -->
+    <article class="card" data-sweet="3">
+      <header class="card__head">
+        <span class="card__no">№ 08</span>
+        <span class="card__price">£5.40</span>
+      </header>
+      <h3 class="card__en">Osmanthus Sour</h3>
+      <div class="card__cn">桂花酸柑</div>
+      <div class="card__base">
+        <span>Osmanthus, yuzu, oolong, soda finish</span>
+      </div>
+      <div class="card__hover">
+        <div class="row"><span>Ingredients</span><span>osmanthus, yuzu, oolong, soda</span></div>
+        <div class="row"><span>Calories</span><span>62 kcal</span></div>
+        <div class="row sweet"><span>Sweetness</span>
+          <div class="slider"><i style="--w:35%"></i></div>
+        </div>
+        <div class="pair">If you like <b>gin & tonic</b> → try this.</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ───────────── AI PAIRING ───────────── -->
+<section class="pair-sec" id="pair">
+  <div class="section__head">
+    <span class="section__num">02 / The Pairing</span>
+    <h2>Let us match you.</h2>
+    <p>Tell the room what you already love. A short reading follows —
+       written by a person, scaffolded by a machine.</p>
+  </div>
+
+  <div class="pair__inner">
+    <div class="pair__prompts" id="prompts">
+      <button class="prompt" data-p="coffee">
+        <span class="prompt__num">i.</span>
+        <span class="prompt__text">Post-roast Sunday coffee.</span>
+        <span class="prompt__cn">咖啡星期日</span>
+      </button>
+      <button class="prompt" data-p="aperol">
+        <span class="prompt__num">ii.</span>
+        <span class="prompt__text">The Aperol crowd.</span>
+        <span class="prompt__cn">微醺一族</span>
+      </button>
+      <button class="prompt" data-p="jasmine">
+        <span class="prompt__num">iii.</span>
+        <span class="prompt__text">I drink jasmine green at home.</span>
+        <span class="prompt__cn">家有茉莉</span>
+      </button>
+      <button class="prompt" data-p="builder">
+        <span class="prompt__num">iv.</span>
+        <span class="prompt__text">Convert me — I’m a builder’s tea person.</span>
+        <span class="prompt__cn">英式濃茶派</span>
+      </button>
+    </div>
+
+    <div class="pair__result" id="pairResult" hidden>
+      <div class="pair__resultHead">
+        <span class="section__num">A reading for you</span>
+        <button class="pair__reset" id="pairReset">↺ start over</button>
+      </div>
+
+      <div class="pair__carousel" id="pairCarousel">
+        <!-- injected -->
+      </div>
+
+      <p class="pair__essay" id="pairEssay"></p>
+
+      <div class="pair__sign">
+        <span>Written at the counter.</span>
+        <span>— The Soho team</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── THE SPACE ───────────── -->
+<section class="space" id="space">
+  <div class="section__head">
+    <span class="section__num">03 / The Space</span>
+    <h2>Dean Street, in three frames.</h2>
+    <p>A shopfront, a counter, a ritual. Photographed in early November,
+       before the sign went up.</p>
+  </div>
+
+  <div class="space__strip">
+    <figure class="frame frame--tall">
+      <div class="frame__img" style="background:linear-gradient(160deg,#9a9489 0%,#6e685d 60%,#3b362f 100%);">
+        <div class="frame__overlay">
+          <span class="frame__cn">門口</span>
+        </div>
+      </div>
+      <figcaption>
+        <span>i.</span> The shopfront, 41 Dean Street. Wet pavement, neon
+        from the bar opposite.
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame__img" style="background:linear-gradient(140deg,#d9cfbe 0%,#b8a98e 70%,#7a6b50 100%);">
+        <div class="frame__overlay">
+          <span class="frame__cn">茶人</span>
+        </div>
+      </div>
+      <figcaption>
+        <span>ii.</span> Wen, head tea-master. Trained in Wuyi. Quietly
+        learning South London.
+      </figcaption>
+    </figure>
+
+    <figure class="frame">
+      <div class="frame__img" style="background:linear-gradient(180deg,#c8302a 0%,#8a1f1a 100%);">
+        <div class="frame__overlay">
+          <span class="frame__cn">儀式</span>
+        </div>
+      </div>
+      <figcaption>
+        <span>iii.</span> The pour. Five seconds, two hands, one cup. The
+        only rule on the wall.
+      </figcaption>
+    </figure>
+
+    <figure class="frame frame--wide">
+      <div class="frame__img" style="background:linear-gradient(120deg,#3a3833 0%,#1f1d1a 100%);">
+        <div class="frame__overlay">
+          <span class="frame__cn">夜</span>
+        </div>
+      </div>
+      <figcaption>
+        <span>iv.</span> 22:14. Last sitting. The window fogs in. Soho
+        keeps moving.
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ───────────── RESERVATION ───────────── -->
+<section class="book" id="book">
+  <div class="section__head section__head--centered">
+    <span class="section__num">04 / The Reservation</span>
+    <h2>A table, an hour, a city.</h2>
+    <p>Tables hold for fifteen minutes. Walk-ins always welcome at the
+       counter.</p>
+  </div>
+
+  <form class="book__form" onsubmit="event.preventDefault(); this.classList.add('booked');">
+    <div class="book__row">
+      <label>
+        <span>Name · 姓名</span>
+        <input type="text" placeholder="e.g. Ilya C." />
+      </label>
+      <label>
+        <span>Party · 人數</span>
+        <select>
+          <option>1 guest</option>
+          <option selected>2 guests</option>
+          <option>3 guests</option>
+          <option>4 guests</option>
+          <option>5+ — call us</option>
+        </select>
+      </label>
+    </div>
+
+    <div class="book__row">
+      <label>
+        <span>Date · 日期</span>
+        <input type="date" />
+      </label>
+      <label>
+        <span>Sitting · 時段</span>
+        <div class="slots">
+          <input type="radio" name="slot" id="s1"/><label for="s1">11:00</label>
+          <input type="radio" name="slot" id="s2" checked/><label for="s2">13:30</label>
+          <input type="radio" name="slot" id="s3"/><label for="s3">16:00</label>
+          <input type="radio" name="slot" id="s4"/><label for="s4">18:30</label>
+          <input type="radio" name="slot" id="s5"/><label for="s5">21:00</label>
+        </div>
+      </label>
+    </div>
+
+    <button class="book__btn" type="submit">
+      <span class="book__btnT">Hold the table</span>
+      <span class="book__btnC">確認預訂</span>
+    </button>
+
+    <div class="book__confirm">
+      <span>✓</span> Table held. We’ll be at the door — 41 Dean Street.
+    </div>
+  </form>
+</section>
+
+<!-- ───────────── FOOTER ───────────── -->
+<footer class="foot">
+  <div class="foot__grid">
+    <div class="foot__col">
+      <div class="foot__brand">HEYTEA · 喜茶</div>
+      <div class="foot__sub">Soho, London W1 — Autumn ’26</div>
+    </div>
+    <div class="foot__col">
+      <span class="foot__label">Address</span>
+      41 Dean Street<br/>London W1D 4PY
+    </div>
+    <div class="foot__col">
+      <span class="foot__label">Hours</span>
+      Mon–Thu 10:00 → 22:00<br/>
+      Fri–Sun 10:00 → 23:30
+    </div>
+    <div class="foot__col">
+      <span class="foot__label">Notes</span>
+      Cashless · Dog-friendly counter · Eight pours, daily
+    </div>
+  </div>
+
+  <div class="foot__rule"></div>
+
+  <div class="foot__legal">
+    <span>Spec / concept work · unaffiliated with HEYTEA</span>
+    <span>Designed at Globsense — Shanghai / London</span>
+    <span>№ 12 of the Reel</span>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
