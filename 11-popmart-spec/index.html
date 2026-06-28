@@ -1,14 +1,963 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Pop Mart Vault — pending</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Vault · Pop Mart Concept — Globsense Reel</title>
 <link rel="stylesheet" href="../_shared/tokens.css">
-<style>body{display:grid;place-items:center;min-height:100vh;text-align:center;padding:40px;}
-h1{font-family:var(--font-display);font-size:var(--t-display);}
-.tag{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.2em;color:var(--brand-accent);}
-.lede{color:var(--text-d-body);max-width:540px;margin:24px auto;}</style>
-</head><body>
-<div>
-<div class="tag">#11 · pending build</div>
-<h1>Pop Mart Vault</h1>
-<p class="lede">The collector's vault: 3D shelf, AI hunter, trade graph.</p>
-<a class="back-to-reel" href="../">← back to reel</a>
-</div>
-</body></html>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ─── Page-local palette: dark base + 5 rarity pastels ─────────── */
+  :root{
+    --rar-common:   #C8D4E0;
+    --rar-rare:     #8FD4C1;
+    --rar-epic:     #B5A3FF;
+    --rar-legend:   #FFB87A;
+    --rar-mythic:   #FF7AB6;
+
+    --vault-bg:     #08080F;
+    --vault-bg-2:   #0E0E18;
+    --vault-card:   #16161F;
+    --vault-card-2: #1E1E2A;
+    --vault-edge:   rgba(255,255,255,0.07);
+    --vault-edge-2: rgba(255,255,255,0.18);
+
+    --ink-strong:   rgba(255,255,255,0.96);
+    --ink-body:     rgba(255,255,255,0.78);
+    --ink-caption:  rgba(255,255,255,0.62);
+    --ink-dim:      rgba(255,255,255,0.40);
+
+    --font-round:   'Nunito', 'Quicksand', 'Inter', system-ui, sans-serif;
+    --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  html,body{
+    background:var(--vault-bg);
+    color:var(--ink-body);
+    font-family:var(--font-round);
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+  *,*::before,*::after{box-sizing:border-box;}
+
+  /* Subtle film grain overlay */
+  body::before{
+    content:"";
+    position:fixed;inset:0;z-index:1;pointer-events:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.05 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+    opacity:.6;mix-blend-mode:overlay;
+  }
+
+  h1,h2,h3,h4{color:var(--ink-strong);font-family:var(--font-round);font-weight:800;line-height:1.05;margin:0;letter-spacing:-0.02em;}
+  a{color:inherit;text-decoration:none;}
+  ::selection{background:var(--rar-mythic);color:#1A0A14;}
+
+  .wrap{max-width:1280px;margin:0 auto;padding:0 32px;position:relative;z-index:2;}
+
+  /* ─── Top nav strip ─────────────────────────────────────────────── */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:60;
+    display:flex;justify-content:space-between;align-items:center;
+    padding:18px 32px;
+    background:linear-gradient(180deg,rgba(8,8,15,0.85),rgba(8,8,15,0));
+    backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  }
+  .nav .brand{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--ink-caption);}
+  .nav .brand b{color:var(--ink-strong);font-weight:600;letter-spacing:.18em;}
+  .nav ul{display:flex;gap:28px;list-style:none;margin:0;padding:0;}
+  .nav ul a{font-size:13px;font-weight:600;color:var(--ink-caption);letter-spacing:.04em;transition:color .2s;position:relative;}
+  .nav ul a:hover{color:var(--rar-mythic);}
+  .nav ul a::after{content:"";position:absolute;left:0;right:0;bottom:-6px;height:1px;background:var(--rar-mythic);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease-cinematic);}
+  .nav ul a:hover::after{transform:scaleX(1);}
+
+  /* ─── Hero ──────────────────────────────────────────────────────── */
+  .hero{
+    position:relative;min-height:100vh;overflow:hidden;
+    display:flex;align-items:center;justify-content:center;
+    background:
+      radial-gradient(1200px 700px at 18% 78%,rgba(181,163,255,0.22),transparent 60%),
+      radial-gradient(1000px 700px at 82% 18%,rgba(255,122,182,0.20),transparent 60%),
+      radial-gradient(800px 500px at 50% 50%,rgba(255,184,122,0.12),transparent 70%),
+      linear-gradient(180deg,#08080F 0%,#0E0E18 100%);
+    perspective:1400px;
+    z-index:2;
+  }
+  .stars{
+    position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1.2px 1.2px at 10% 20%,rgba(255,255,255,.6),transparent 50%),
+      radial-gradient(1px 1px at 70% 40%,rgba(255,255,255,.55),transparent 50%),
+      radial-gradient(1px 1px at 35% 70%,rgba(255,255,255,.4),transparent 50%),
+      radial-gradient(1.5px 1.5px at 85% 75%,rgba(255,255,255,.7),transparent 50%),
+      radial-gradient(1px 1px at 22% 88%,rgba(255,255,255,.3),transparent 50%),
+      radial-gradient(1.2px 1.2px at 60% 12%,rgba(255,255,255,.55),transparent 50%),
+      radial-gradient(1px 1px at 5% 55%,rgba(255,255,255,.4),transparent 50%),
+      radial-gradient(1.2px 1.2px at 95% 50%,rgba(255,255,255,.5),transparent 50%);
+    animation:twinkle 8s ease-in-out infinite;
+  }
+  @keyframes twinkle{0%,100%{opacity:.5}50%{opacity:.85}}
+
+  .aurora{
+    position:absolute;width:600px;height:600px;border-radius:50%;
+    filter:blur(80px);opacity:.35;pointer-events:none;mix-blend-mode:screen;
+  }
+  .aurora.a{left:-10%;top:20%;background:radial-gradient(circle,rgba(255,122,182,.5),transparent 70%);animation:drift1 14s ease-in-out infinite;}
+  .aurora.b{right:-15%;top:10%;background:radial-gradient(circle,rgba(143,212,193,.5),transparent 70%);animation:drift2 16s ease-in-out infinite;}
+  .aurora.c{left:40%;top:60%;background:radial-gradient(circle,rgba(181,163,255,.5),transparent 70%);animation:drift3 18s ease-in-out infinite;}
+  @keyframes drift1{0%,100%{transform:translate(0,0)}50%{transform:translate(80px,-40px)}}
+  @keyframes drift2{0%,100%{transform:translate(0,0)}50%{transform:translate(-60px,60px)}}
+  @keyframes drift3{0%,100%{transform:translate(0,0)}50%{transform:translate(50px,-50px)}}
+
+  .stage{position:relative;width:100%;height:560px;transform-style:preserve-3d;}
+  .fig{
+    position:absolute;width:200px;height:260px;
+    transform-style:preserve-3d;
+    animation:float 9s var(--ease-cinematic) infinite;
+    filter:drop-shadow(0 30px 60px rgba(0,0,0,0.7));
+  }
+  .fig.a{left:14%;top:30%;animation-delay:-2s;}
+  .fig.b{left:43%;top:8%;width:240px;height:320px;animation-delay:-5s;}
+  .fig.c{right:14%;top:36%;animation-delay:-7s;}
+  @keyframes float{
+    0%,100%{transform:translateY(0) rotate(-3deg);}
+    50%   {transform:translateY(-24px) rotate(3deg);}
+  }
+  .fig svg{width:100%;height:100%;overflow:visible;}
+
+  .hero-copy{position:absolute;left:0;right:0;bottom:0;text-align:center;padding-bottom:90px;z-index:5;}
+  .tag-row{
+    display:inline-flex;gap:10px;align-items:center;padding:7px 16px;
+    border:1px solid var(--vault-edge-2);border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.24em;text-transform:uppercase;
+    color:var(--ink-body);background:rgba(0,0,0,0.5);
+    backdrop-filter:blur(8px);
+  }
+  .tag-row .dot{width:6px;height:6px;border-radius:50%;background:var(--rar-mythic);box-shadow:0 0 12px var(--rar-mythic),0 0 4px #fff;}
+  h1.hero-title{
+    font-family:var(--font-round);font-weight:900;
+    font-size:clamp(60px,10vw,160px);
+    background:linear-gradient(180deg,#FFFFFF 0%,#E0D0FF 45%,#FF7AB6 100%);
+    -webkit-background-clip:text;background-clip:text;
+    -webkit-text-fill-color:transparent;
+    margin:24px 0 16px;letter-spacing:-0.045em;line-height:0.92;
+    filter:drop-shadow(0 8px 32px rgba(255,122,182,0.25));
+  }
+  .hero-sub{max-width:680px;margin:0 auto;color:var(--ink-body);font-size:19px;line-height:1.55;font-weight:500;}
+  .hero-sub em{font-style:normal;color:var(--rar-mythic);font-weight:700;}
+  .scroll-cue{
+    position:absolute;bottom:24px;left:50%;transform:translateX(-50%);
+    color:var(--ink-caption);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.3em;text-transform:uppercase;
+    display:flex;flex-direction:column;align-items:center;gap:8px;z-index:5;
+  }
+  .scroll-cue::after{content:"";width:1px;height:32px;background:linear-gradient(180deg,var(--ink-caption),transparent);animation:cue 2.2s ease-in-out infinite;}
+  @keyframes cue{0%,100%{opacity:.3;transform:scaleY(.6)}50%{opacity:1;transform:scaleY(1)}}
+
+  /* ─── Section frame ─────────────────────────────────────────────── */
+  section{padding:120px 0;position:relative;z-index:2;}
+  .eyebrow{
+    font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--rar-mythic);margin-bottom:16px;display:inline-flex;align-items:center;gap:10px;
+  }
+  .eyebrow::before{content:"";width:24px;height:1px;background:var(--rar-mythic);}
+  .section-h{font-size:clamp(36px,5vw,68px);color:var(--ink-strong);line-height:1.05;margin:0 0 18px;}
+  .section-lede{max-width:580px;color:var(--ink-body);font-size:17px;line-height:1.6;margin-bottom:56px;font-weight:500;}
+
+  /* ─── The Shelf ─────────────────────────────────────────────────── */
+  .shelf-rail{
+    position:relative;overflow-x:auto;overflow-y:visible;
+    padding:40px 32px 60px;margin:0 -32px;
+    scroll-snap-type:x mandatory;
+    -webkit-overflow-scrolling:touch;
+    perspective:1200px;
+  }
+  .shelf-rail::-webkit-scrollbar{height:6px;}
+  .shelf-rail::-webkit-scrollbar-track{background:rgba(255,255,255,0.04);border-radius:3px;}
+  .shelf-rail::-webkit-scrollbar-thumb{background:linear-gradient(90deg,var(--rar-epic),var(--rar-mythic));border-radius:3px;}
+  .shelf-row{display:flex;gap:24px;width:max-content;padding-left:32px;}
+
+  .shelf{
+    flex:0 0 260px;scroll-snap-align:start;
+    background:linear-gradient(180deg,var(--vault-card-2) 0%,var(--vault-card) 100%);
+    border:1px solid var(--vault-edge);
+    border-radius:20px;
+    padding:24px 22px 22px;
+    position:relative;
+    transform:rotateX(2deg);transform-style:preserve-3d;
+    transition:transform .4s var(--ease-cinematic),border-color .3s,box-shadow .4s;
+    cursor:pointer;
+    box-shadow:0 12px 40px rgba(0,0,0,0.4);
+  }
+  .shelf:hover{
+    transform:rotateX(0deg) translateY(-10px);
+    border-color:var(--vault-edge-2);
+    box-shadow:0 24px 60px rgba(0,0,0,0.6),0 0 0 1px rgba(255,255,255,0.04) inset;
+  }
+  .shelf .figure-art{
+    height:200px;display:flex;align-items:flex-end;justify-content:center;
+    background:radial-gradient(ellipse at 50% 70%,rgba(255,255,255,0.04) 0%,transparent 70%);
+    border-radius:14px;margin-bottom:18px;position:relative;overflow:hidden;
+  }
+  .shelf .figure-art::after{
+    content:"";position:absolute;left:14%;right:14%;bottom:8px;height:10px;
+    background:radial-gradient(ellipse,rgba(0,0,0,0.7) 0%,transparent 70%);
+    border-radius:50%;
+  }
+  .shelf .figure-art svg{height:175px;filter:drop-shadow(0 8px 20px rgba(0,0,0,0.5));}
+  .shelf .meta{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:8px;gap:8px;}
+  .shelf .name{font-weight:800;color:var(--ink-strong);font-size:16px;letter-spacing:-0.01em;}
+  .shelf .ed{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-caption);letter-spacing:.1em;}
+  .shelf .rarity{
+    display:inline-flex;align-items:center;gap:6px;
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+    color:var(--ink-caption);font-weight:600;
+  }
+  .shelf .rarity .pip{width:8px;height:8px;border-radius:2px;}
+  .shelf .note{margin-top:14px;font-size:13px;color:var(--ink-caption);line-height:1.5;font-style:italic;font-weight:500;}
+
+  .r-common .pip {background:var(--rar-common);} .r-common .name-color{color:var(--rar-common);}
+  .r-rare   .pip {background:var(--rar-rare);}   .r-rare   .name-color{color:var(--rar-rare);}
+  .r-epic   .pip {background:var(--rar-epic);}   .r-epic   .name-color{color:var(--rar-epic);}
+  .r-legend .pip {background:var(--rar-legend);} .r-legend .name-color{color:var(--rar-legend);}
+  .r-mythic .pip {background:var(--rar-mythic);box-shadow:0 0 12px var(--rar-mythic);} .r-mythic .name-color{color:var(--rar-mythic);}
+
+  .r-mythic{background:linear-gradient(180deg,rgba(255,122,182,0.08) 0%,var(--vault-card) 60%);}
+  .r-legend{background:linear-gradient(180deg,rgba(255,184,122,0.06) 0%,var(--vault-card) 60%);}
+  .r-epic  {background:linear-gradient(180deg,rgba(181,163,255,0.06) 0%,var(--vault-card) 60%);}
+
+  /* rarity legend strip */
+  .rarity-strip{
+    display:flex;gap:16px;flex-wrap:wrap;margin-top:36px;padding:18px 22px;
+    background:var(--vault-card);border:1px solid var(--vault-edge);border-radius:14px;
+  }
+  .rarity-strip .item{display:flex;align-items:center;gap:8px;font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-body);font-weight:600;}
+  .rarity-strip .item .pip{width:10px;height:10px;border-radius:2px;}
+
+  /* ─── Hunter (AI chat) ──────────────────────────────────────────── */
+  .hunter-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:64px;align-items:start;}
+  @media(max-width:900px){.hunter-grid{grid-template-columns:1fr;gap:40px;}}
+
+  .chat{
+    background:linear-gradient(180deg,var(--vault-card-2) 0%,var(--vault-card) 100%);
+    border:1px solid var(--vault-edge);
+    border-radius:24px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.5),0 0 0 1px rgba(255,255,255,0.02) inset;
+  }
+  .chat-head{
+    display:flex;align-items:center;gap:14px;
+    padding:20px 24px;border-bottom:1px solid var(--vault-edge);
+    background:linear-gradient(180deg,rgba(181,163,255,0.08),transparent);
+  }
+  .chat-head .avatar{
+    width:40px;height:40px;border-radius:50%;position:relative;flex-shrink:0;
+    background:conic-gradient(from 0deg,var(--rar-mythic),var(--rar-epic),var(--rar-legend),var(--rar-rare),var(--rar-mythic));
+    box-shadow:0 0 18px rgba(255,122,182,0.4);
+    animation:spin 8s linear infinite;
+  }
+  .chat-head .avatar::after{
+    content:"";position:absolute;inset:4px;border-radius:50%;
+    background:var(--vault-card);
+    box-shadow:0 0 0 1px var(--vault-edge) inset;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .chat-head .who{flex:1;min-width:0;}
+  .chat-head .who b{display:block;font-size:15px;color:var(--ink-strong);font-weight:700;margin-bottom:2px;}
+  .chat-head .who span{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--rar-rare);font-weight:600;}
+  .chat-head .who span::before{content:"●";margin-right:6px;animation:pulse 2s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{opacity:.4}50%{opacity:1}}
+  .chat-head .meta-btn{
+    font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;
+    padding:6px 12px;border:1px solid var(--vault-edge-2);border-radius:999px;color:var(--ink-caption);
+  }
+
+  .chat-body{padding:24px;min-height:380px;max-height:520px;overflow-y:auto;display:flex;flex-direction:column;gap:14px;}
+  .chat-body::-webkit-scrollbar{width:4px;}
+  .chat-body::-webkit-scrollbar-thumb{background:var(--vault-edge-2);border-radius:2px;}
+  .msg{
+    max-width:84%;padding:13px 17px;border-radius:16px;
+    font-size:14px;line-height:1.55;animation:msgIn .45s var(--ease-cinematic);
+    font-weight:500;color:var(--ink-strong);
+  }
+  @keyframes msgIn{from{opacity:0;transform:translateY(10px);}to{opacity:1;transform:none;}}
+  .msg.agent{
+    align-self:flex-start;
+    background:linear-gradient(135deg,rgba(181,163,255,0.14),rgba(143,212,193,0.08));
+    border:1px solid rgba(181,163,255,0.20);
+    border-bottom-left-radius:4px;
+  }
+  .msg.user {
+    align-self:flex-end;
+    background:linear-gradient(135deg,var(--rar-mythic) 0%,#FF5C9F 100%);
+    color:#1A0A14;border-bottom-right-radius:4px;
+    font-weight:700;
+    box-shadow:0 8px 24px rgba(255,122,182,0.35);
+  }
+  .msg b{color:var(--rar-legend);font-weight:800;}
+  .msg.user b{color:#1A0A14;}
+
+  .chat-actions{
+    display:flex;flex-wrap:wrap;gap:10px;
+    padding:18px 24px;border-top:1px solid var(--vault-edge);
+    background:rgba(0,0,0,0.25);
+  }
+  .chat-actions button{
+    flex:1;min-width:90px;padding:11px 16px;
+    border-radius:10px;border:1px solid var(--vault-edge-2);
+    background:rgba(255,255,255,0.02);
+    color:var(--ink-strong);
+    font-family:var(--font-round);font-size:13px;font-weight:700;cursor:pointer;
+    transition:all .2s var(--ease-cinematic);
+  }
+  .chat-actions button:hover{
+    border-color:var(--rar-mythic);color:var(--rar-mythic);
+    background:rgba(255,122,182,0.06);
+    transform:translateY(-1px);
+  }
+  .chat-actions button:active{transform:scale(0.97);}
+  .chat-actions button.primary{
+    background:linear-gradient(135deg,var(--rar-mythic),#FF5C9F);
+    color:#1A0A14;border-color:transparent;font-weight:800;
+    box-shadow:0 6px 20px rgba(255,122,182,0.35);
+  }
+  .chat-actions button.primary:hover{
+    color:#1A0A14;background:linear-gradient(135deg,#fff,#F0F0F5);
+    box-shadow:0 8px 28px rgba(255,255,255,0.25);
+  }
+  .chat-actions button:disabled{opacity:.4;cursor:not-allowed;transform:none;}
+
+  .hunter-copy .feature{display:flex;gap:16px;margin-bottom:24px;}
+  .hunter-copy .feature .icon{
+    flex:0 0 40px;height:40px;border-radius:10px;
+    background:rgba(143,212,193,0.12);
+    border:1px solid rgba(143,212,193,0.25);
+    display:grid;place-items:center;
+    color:var(--rar-rare);font-weight:800;font-family:'JetBrains Mono',monospace;font-size:15px;
+  }
+  .hunter-copy .feature h4{font-size:17px;color:var(--ink-strong);font-weight:800;margin:0 0 6px;}
+  .hunter-copy .feature p{margin:0;font-size:14px;color:var(--ink-body);line-height:1.55;font-weight:500;}
+
+  /* ─── Trade Graph ───────────────────────────────────────────────── */
+  .graph-wrap{
+    background:radial-gradient(ellipse at 50% 50%,rgba(181,163,255,0.06),transparent 70%),var(--vault-card);
+    border:1px solid var(--vault-edge);
+    border-radius:24px;padding:32px;position:relative;
+    height:580px;overflow:hidden;
+    box-shadow:0 30px 80px rgba(0,0,0,0.4);
+  }
+  .graph-wrap::before{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background-image:
+      radial-gradient(1px 1px at 20% 30%,rgba(255,255,255,.3),transparent 50%),
+      radial-gradient(1px 1px at 80% 60%,rgba(255,255,255,.25),transparent 50%),
+      radial-gradient(1px 1px at 50% 80%,rgba(255,255,255,.2),transparent 50%);
+    opacity:.5;
+  }
+  .graph-wrap svg{width:100%;height:100%;display:block;position:relative;z-index:1;}
+  .graph-tip{
+    position:absolute;pointer-events:none;z-index:5;
+    background:rgba(8,8,15,0.92);backdrop-filter:blur(10px);
+    border:1px solid var(--vault-edge-2);border-radius:12px;
+    padding:12px 16px;font-size:12px;color:var(--ink-strong);
+    transform:translate(-50%,-130%);opacity:0;transition:opacity .15s;
+    max-width:240px;line-height:1.5;font-weight:500;
+    box-shadow:0 12px 40px rgba(0,0,0,0.6);
+  }
+  .graph-tip b{color:var(--rar-mythic);font-weight:800;display:block;margin-bottom:2px;}
+  .graph-tip .loc{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-caption);letter-spacing:.1em;text-transform:uppercase;margin-bottom:8px;}
+  .graph-tip .trade{display:block;margin-top:6px;padding-top:6px;border-top:1px solid var(--vault-edge);font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-body);}
+
+  .legend{display:flex;gap:24px;margin-top:24px;flex-wrap:wrap;}
+  .legend-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--ink-body);font-family:'JetBrains Mono',monospace;letter-spacing:.05em;font-weight:600;}
+  .legend-item .swatch{width:12px;height:12px;border-radius:50%;}
+  .legend-item .pulse{position:relative;}
+  .legend-item .pulse::after{
+    content:"";position:absolute;inset:-4px;border-radius:50%;
+    border:1px solid currentColor;animation:legendPulse 2s ease-out infinite;
+  }
+  @keyframes legendPulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(2.5);opacity:0}}
+
+  /* ─── Calendar ──────────────────────────────────────────────────── */
+  .cal{display:grid;grid-template-columns:repeat(7,1fr);gap:14px;}
+  @media(max-width:900px){.cal{grid-template-columns:repeat(2,1fr);}}
+  .day{
+    background:linear-gradient(180deg,var(--vault-card-2) 0%,var(--vault-card) 100%);
+    border:1px solid var(--vault-edge);
+    border-radius:16px;padding:20px 18px;
+    display:flex;flex-direction:column;gap:10px;min-height:200px;
+    transition:transform .3s var(--ease-cinematic),border-color .3s,box-shadow .3s;
+    position:relative;overflow:hidden;
+  }
+  .day::before{
+    content:"";position:absolute;left:0;right:0;top:0;height:2px;
+    background:linear-gradient(90deg,transparent,var(--rar-legend),transparent);
+    opacity:0;transition:opacity .3s;
+  }
+  .day:hover{
+    transform:translateY(-6px);
+    border-color:rgba(255,184,122,0.4);
+    box-shadow:0 20px 50px rgba(0,0,0,0.5);
+  }
+  .day:hover::before{opacity:1;}
+  .day.today{border-color:rgba(255,122,182,0.4);background:linear-gradient(180deg,rgba(255,122,182,0.10) 0%,var(--vault-card) 60%);}
+  .day.today::before{opacity:1;background:linear-gradient(90deg,transparent,var(--rar-mythic),transparent);}
+  .day .dow{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-caption);font-weight:600;}
+  .day .date{font-family:var(--font-round);font-weight:900;font-size:30px;color:var(--ink-strong);line-height:1;letter-spacing:-0.02em;}
+  .day .drop{margin-top:auto;display:flex;flex-direction:column;gap:6px;}
+  .day .drop-name{font-size:14px;font-weight:800;color:var(--ink-strong);letter-spacing:-0.01em;}
+  .day .drop-meta{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink-body);letter-spacing:.1em;text-transform:uppercase;font-weight:500;}
+  .day.empty .drop-name{color:var(--ink-dim);font-weight:500;font-style:italic;}
+  .day .ribbon{
+    display:inline-block;padding:4px 10px;border-radius:999px;
+    font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;
+    font-weight:700;align-self:flex-start;
+  }
+  .ribbon.r-mythic{background:rgba(255,122,182,0.18);color:#FFC4DC;border:1px solid rgba(255,122,182,0.3);}
+  .ribbon.r-legend{background:rgba(255,184,122,0.18);color:#FFD5AE;border:1px solid rgba(255,184,122,0.3);}
+  .ribbon.r-epic  {background:rgba(181,163,255,0.18);color:#D8CFFF;border:1px solid rgba(181,163,255,0.3);}
+  .ribbon.r-rare  {background:rgba(143,212,193,0.18);color:#B8E8DC;border:1px solid rgba(143,212,193,0.3);}
+
+  /* ─── Footer ────────────────────────────────────────────────────── */
+  footer{padding:80px 0 140px;text-align:center;color:var(--ink-caption);font-size:12px;font-family:'JetBrains Mono',monospace;letter-spacing:.14em;position:relative;z-index:2;}
+  footer .mark{color:var(--rar-mythic);font-weight:700;}
+  footer p{margin:8px 0;}
+
+  /* ─── Mobile tweaks ────────────────────────────────────────────── */
+  @media(max-width:700px){
+    .nav ul{display:none;}
+    .wrap{padding:0 20px;}
+    section{padding:80px 0;}
+    .stage{height:380px;}
+    .fig{width:130px;height:170px;}
+    .fig.b{width:160px;height:210px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ───────────── Top Nav ───────────── -->
+<nav class="nav">
+  <div class="brand"><b>THE&nbsp;VAULT</b> · pop mart concept · spec 11</div>
+  <ul>
+    <li><a href="#shelf">Shelf</a></li>
+    <li><a href="#hunter">Hunter</a></li>
+    <li><a href="#graph">Trades</a></li>
+    <li><a href="#drops">Drops</a></li>
+  </ul>
+</nav>
+
+<!-- ───────────── Hero ───────────── -->
+<section class="hero">
+  <div class="stars"></div>
+  <div class="aurora a"></div>
+  <div class="aurora b"></div>
+  <div class="aurora c"></div>
+
+  <div class="stage" aria-hidden="true">
+    <div class="fig a">
+      <svg viewBox="0 0 200 260" fill="none">
+        <ellipse cx="100" cy="245" rx="60" ry="6" fill="rgba(0,0,0,0.5)"/>
+        <rect x="50" y="135" width="100" height="100" rx="20" fill="#B5A3FF"/>
+        <rect x="50" y="135" width="100" height="40" rx="20" fill="#9482E6"/>
+        <circle cx="100" cy="80" r="62" fill="#FFB87A"/>
+        <circle cx="100" cy="80" r="62" fill="url(#shineA)"/>
+        <circle cx="80" cy="80" r="6" fill="#1A0A14"/>
+        <circle cx="120" cy="80" r="6" fill="#1A0A14"/>
+        <path d="M82 102 Q100 116 118 102" stroke="#1A0A14" stroke-width="3" stroke-linecap="round" fill="none"/>
+        <circle cx="68" cy="95" r="7" fill="#FF7AB6" opacity=".7"/>
+        <circle cx="132" cy="95" r="7" fill="#FF7AB6" opacity=".7"/>
+        <defs>
+          <radialGradient id="shineA" cx="35%" cy="30%" r="60%">
+            <stop offset="0%" stop-color="#fff" stop-opacity=".55"/>
+            <stop offset="100%" stop-color="#fff" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
+      </svg>
+    </div>
+
+    <div class="fig b">
+      <svg viewBox="0 0 240 320" fill="none">
+        <ellipse cx="120" cy="305" rx="72" ry="7" fill="rgba(0,0,0,0.5)"/>
+        <path d="M120 145 L40 290 L200 290 Z" fill="#FF7AB6"/>
+        <path d="M120 145 L60 250 L180 250 Z" fill="#E66099" opacity=".75"/>
+        <rect x="55" y="35" width="130" height="120" rx="32" fill="#8FD4C1"/>
+        <rect x="55" y="35" width="130" height="40" rx="32" fill="#6FBFA8"/>
+        <circle cx="95" cy="95" r="7" fill="#1A0A14"/>
+        <circle cx="145" cy="95" r="7" fill="#1A0A14"/>
+        <ellipse cx="120" cy="125" rx="14" ry="6" fill="#1A0A14"/>
+        <line x1="120" y1="35" x2="120" y2="10" stroke="#fff" stroke-width="3"/>
+        <circle cx="120" cy="8" r="6" fill="#FFB87A"/>
+        <circle cx="120" cy="8" r="12" fill="#FFB87A" opacity=".3"/>
+      </svg>
+    </div>
+
+    <div class="fig c">
+      <svg viewBox="0 0 200 260" fill="none">
+        <ellipse cx="100" cy="245" rx="60" ry="6" fill="rgba(0,0,0,0.5)"/>
+        <circle cx="100" cy="185" r="65" fill="#FFB87A"/>
+        <path d="M35 185 A65 65 0 0 1 165 185 Z" fill="#E69A5E" opacity=".5"/>
+        <ellipse cx="100" cy="85" rx="55" ry="60" fill="#B5A3FF"/>
+        <ellipse cx="55" cy="55" rx="12" ry="22" fill="#B5A3FF" transform="rotate(-25 55 55)"/>
+        <ellipse cx="145" cy="55" rx="12" ry="22" fill="#B5A3FF" transform="rotate(25 145 55)"/>
+        <circle cx="80" cy="85" r="6" fill="#1A0A14"/>
+        <circle cx="120" cy="85" r="6" fill="#1A0A14"/>
+        <path d="M88 108 Q100 100 112 108" stroke="#1A0A14" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <circle cx="100" cy="190" r="14" fill="#fff" opacity=".28"/>
+      </svg>
+    </div>
+  </div>
+
+  <div class="hero-copy">
+    <span class="tag-row"><span class="dot"></span>concept · unaffiliated · #11 spec</span>
+    <h1 class="hero-title">The Vault.</h1>
+    <p class="hero-sub">every figure you own, every figure you want,<br>every figure you&rsquo;ll <em>trade for</em>.</p>
+  </div>
+  <div class="scroll-cue">scroll</div>
+</section>
+
+<!-- ───────────── The 3D Shelf ───────────── -->
+<section id="shelf">
+  <div class="wrap">
+    <div class="eyebrow">02 · personal vault</div>
+    <h2 class="section-h">Your shelf,<br>in three&nbsp;dimensions.</h2>
+    <p class="section-lede">Eight slots. Every figure you've ever pulled, catalogued by edition, rarity, and the story you wrote about it. Drag to scroll — hover to remember.</p>
+  </div>
+
+  <div class="shelf-rail">
+    <div class="shelf-row">
+
+      <div class="shelf r-mythic">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><circle cx="60" cy="120" r="38" fill="#FF7AB6"/><ellipse cx="60" cy="55" rx="34" ry="38" fill="#B5A3FF"/><circle cx="48" cy="55" r="4" fill="#1A0A14"/><circle cx="72" cy="55" r="4" fill="#1A0A14"/><path d="M50 72 Q60 80 70 72" stroke="#1A0A14" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Aurora&nbsp;Whisper</span><span class="ed">001/250</span></div>
+        <span class="rarity"><span class="pip"></span>Mythic</span>
+        <p class="note">Berlin, 02:14. Stood in the cold for four hours. Worth every minute.</p>
+      </div>
+
+      <div class="shelf r-legend">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><rect x="22" y="80" width="76" height="80" rx="14" fill="#FFB87A"/><circle cx="60" cy="50" r="32" fill="#8FD4C1"/><circle cx="50" cy="50" r="3.5" fill="#1A0A14"/><circle cx="70" cy="50" r="3.5" fill="#1A0A14"/><ellipse cx="60" cy="64" rx="8" ry="3" fill="#1A0A14"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Folded&nbsp;Dragon</span><span class="ed">044/500</span></div>
+        <span class="rarity"><span class="pip"></span>Legendary</span>
+        <p class="note">Traded a duplicate Mountain Sleep for it. Fair.</p>
+      </div>
+
+      <div class="shelf r-epic">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><path d="M60 75 L18 150 L102 150 Z" fill="#B5A3FF"/><circle cx="60" cy="50" r="30" fill="#FF7AB6"/><circle cx="50" cy="50" r="3.5" fill="#1A0A14"/><circle cx="70" cy="50" r="3.5" fill="#1A0A14"/><path d="M52 65 Q60 70 68 65" stroke="#1A0A14" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Mountain&nbsp;Sleep</span><span class="ed">112/1k</span></div>
+        <span class="rarity"><span class="pip"></span>Epic</span>
+        <p class="note">First figure. Will never trade.</p>
+      </div>
+
+      <div class="shelf r-rare">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><ellipse cx="60" cy="120" rx="36" ry="38" fill="#8FD4C1"/><rect x="32" y="40" width="56" height="56" rx="16" fill="#FFB87A"/><circle cx="50" cy="65" r="3.5" fill="#1A0A14"/><circle cx="70" cy="65" r="3.5" fill="#1A0A14"/><ellipse cx="60" cy="80" rx="6" ry="2.5" fill="#1A0A14"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Lantern&nbsp;Frog</span><span class="ed">203/2k</span></div>
+        <span class="rarity"><span class="pip"></span>Rare</span>
+        <p class="note">Lucky pull from a Shanghai vending machine.</p>
+      </div>
+
+      <div class="shelf r-mythic">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><circle cx="60" cy="120" r="40" fill="#FF7AB6"/><circle cx="60" cy="120" r="40" fill="url(#g1)"/><ellipse cx="60" cy="50" rx="30" ry="34" fill="#B5A3FF"/><circle cx="50" cy="50" r="4" fill="#1A0A14"/><circle cx="70" cy="50" r="4" fill="#1A0A14"/><path d="M50 68 Q60 76 70 68" stroke="#1A0A14" stroke-width="2" fill="none"/><defs><radialGradient id="g1"><stop offset="0%" stop-color="#fff" stop-opacity=".4"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient></defs></svg>
+        </div>
+        <div class="meta"><span class="name ">Pearl&nbsp;Diver</span><span class="ed">007/120</span></div>
+        <span class="rarity"><span class="pip"></span>Mythic</span>
+        <p class="note">Holographic. Catches light differently every angle.</p>
+      </div>
+
+      <div class="shelf r-epic">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><rect x="20" y="80" width="80" height="80" rx="40" fill="#B5A3FF"/><ellipse cx="60" cy="48" rx="32" ry="34" fill="#FFB87A"/><circle cx="50" cy="48" r="3.5" fill="#1A0A14"/><circle cx="70" cy="48" r="3.5" fill="#1A0A14"/><path d="M52 62 Q60 68 68 62" stroke="#1A0A14" stroke-width="2" fill="none"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Tide&nbsp;Pool</span><span class="ed">056/800</span></div>
+        <span class="rarity"><span class="pip"></span>Epic</span>
+        <p class="note">Holiday drop, 2025. Sentimental.</p>
+      </div>
+
+      <div class="shelf r-common">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><rect x="32" y="80" width="56" height="80" rx="12" fill="#C8D4E0"/><circle cx="60" cy="50" r="30" fill="#8FD4C1"/><circle cx="50" cy="50" r="3.5" fill="#1A0A14"/><circle cx="70" cy="50" r="3.5" fill="#1A0A14"/><line x1="50" y1="65" x2="70" y2="65" stroke="#1A0A14" stroke-width="2" stroke-linecap="round"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Cardboard&nbsp;Cat</span><span class="ed">—</span></div>
+        <span class="rarity"><span class="pip"></span>Common</span>
+        <p class="note">Three of these in a drawer.</p>
+      </div>
+
+      <div class="shelf r-rare">
+        <div class="figure-art">
+          <svg viewBox="0 0 120 170"><ellipse cx="60" cy="118" rx="38" ry="42" fill="#8FD4C1"/><circle cx="60" cy="50" r="32" fill="#B5A3FF"/><circle cx="50" cy="50" r="3.5" fill="#1A0A14"/><circle cx="70" cy="50" r="3.5" fill="#1A0A14"/><path d="M50 65 Q60 73 70 65" stroke="#1A0A14" stroke-width="2" fill="none"/><line x1="60" y1="18" x2="60" y2="6" stroke="#fff" stroke-width="2"/><circle cx="60" cy="4" r="3" fill="#FFB87A"/></svg>
+        </div>
+        <div class="meta"><span class="name ">Antenna&nbsp;Friend</span><span class="ed">421/2.5k</span></div>
+        <span class="rarity"><span class="pip"></span>Rare</span>
+        <p class="note">Tokyo airport vending. 2am decision.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="rarity-strip">
+      <span class="item"><span class="pip" style="background:var(--rar-common)"></span>Common</span>
+      <span class="item"><span class="pip" style="background:var(--rar-rare)"></span>Rare</span>
+      <span class="item"><span class="pip" style="background:var(--rar-epic)"></span>Epic</span>
+      <span class="item"><span class="pip" style="background:var(--rar-legend)"></span>Legendary</span>
+      <span class="item"><span class="pip" style="background:var(--rar-mythic);box-shadow:0 0 12px var(--rar-mythic)"></span>Mythic</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── The Hunter (AI) ───────────── -->
+<section id="hunter">
+  <div class="wrap">
+    <div class="eyebrow">03 · ai moment</div>
+    <h2 class="section-h">The Hunter never&nbsp;sleeps.</h2>
+    <p class="section-lede">Your Vault Agent watches every regional drop, every resale market, every collector who lists. You set the rules. It does the standing-in-line.</p>
+
+    <div class="hunter-grid">
+      <div class="chat">
+        <div class="chat-head">
+          <div class="avatar"></div>
+          <div class="who">
+            <b>Vault Agent</b>
+            <span>online · scanning 14 regions</span>
+          </div>
+          <span class="meta-btn">v2.4</span>
+        </div>
+        <div class="chat-body" id="chatBody">
+          <div class="msg agent">Morning. I scanned overnight while you slept.</div>
+        </div>
+        <div class="chat-actions" id="chatActions">
+          <button class="primary" id="advBtn" onclick="advanceHunter()">Continue ↓</button>
+        </div>
+      </div>
+
+      <div class="hunter-copy">
+        <div class="feature">
+          <div class="icon">∂</div>
+          <div><h4>Region-aware scouting</h4><p>Knows that Aurora Whisper is going for €72 in Berlin but €48 in Madrid this week, before you do.</p></div>
+        </div>
+        <div class="feature">
+          <div class="icon">⌖</div>
+          <div><h4>Price thresholds</h4><p>Set ceilings per figure. The Hunter pings only when a real opportunity crosses your line.</p></div>
+        </div>
+        <div class="feature">
+          <div class="icon">⇌</div>
+          <div><h4>Trade proposals</h4><p>Matches your duplicates against other collectors' wishlists. You approve, it negotiates.</p></div>
+        </div>
+        <div class="feature">
+          <div class="icon">⚐</div>
+          <div><h4>Drop alerts, prioritised</h4><p>Filters tomorrow's drops to what you actually care about. No noise, no scarcity-anxiety doom-scroll.</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Trade Graph ───────────── -->
+<section id="graph">
+  <div class="wrap">
+    <div class="eyebrow">04 · the network</div>
+    <h2 class="section-h">A graph of&nbsp;want.</h2>
+    <p class="section-lede">Every collector is a node. Every proposed trade is an edge. Move your cursor across the constellation — see what's flowing right now.</p>
+
+    <div class="graph-wrap">
+      <svg id="graph" viewBox="0 0 1100 480" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="graph-tip" id="tip"></div>
+    </div>
+
+    <div class="legend">
+      <span class="legend-item"><span class="swatch pulse" style="background:var(--rar-mythic);color:var(--rar-mythic)"></span>You</span>
+      <span class="legend-item"><span class="swatch" style="background:var(--rar-epic)"></span>Active trade partner</span>
+      <span class="legend-item"><span class="swatch" style="background:var(--rar-rare)"></span>Wishlist match</span>
+      <span class="legend-item"><span class="swatch" style="background:var(--rar-common)"></span>Network</span>
+    </div>
+  </div>
+</section>
+
+<!-- ───────────── Drop Calendar ───────────── -->
+<section id="drops">
+  <div class="wrap">
+    <div class="eyebrow">05 · the next seven days</div>
+    <h2 class="section-h">Drops, indexed.</h2>
+    <p class="section-lede">Curated by the Hunter against your wishlist and budget. Skip the rest.</p>
+
+    <div class="cal">
+      <div class="day today"><span class="dow">Mon · Jun&nbsp;29</span><span class="date">29</span><div class="drop"><div class="drop-name">Aurora Whisper</div><div class="drop-meta">EU · 14:00 CET · 250 units</div><span class="ribbon r-mythic">mythic</span></div></div>
+
+      <div class="day"><span class="dow">Tue · Jun&nbsp;30</span><span class="date">30</span><div class="drop"><div class="drop-name">Folded Dragon · v2</div><div class="drop-meta">CN · 20:00 CST · 500 units</div><span class="ribbon r-legend">legendary</span></div></div>
+
+      <div class="day empty"><span class="dow">Wed · Jul&nbsp;01</span><span class="date">01</span><div class="drop"><div class="drop-name">no drops in your filter</div></div></div>
+
+      <div class="day"><span class="dow">Thu · Jul&nbsp;02</span><span class="date">02</span><div class="drop"><div class="drop-name">Mountain Sleep</div><div class="drop-meta">Global · 09:00 UTC · 1k</div><span class="ribbon r-epic">epic</span></div></div>
+
+      <div class="day"><span class="dow">Fri · Jul&nbsp;03</span><span class="date">03</span><div class="drop"><div class="drop-name">Pearl Diver</div><div class="drop-meta">JP · 19:00 JST · 120 units</div><span class="ribbon r-mythic">mythic</span></div></div>
+
+      <div class="day"><span class="dow">Sat · Jul&nbsp;04</span><span class="date">04</span><div class="drop"><div class="drop-name">Lantern Frog</div><div class="drop-meta">SEA · 21:00 SGT · 2k</div><span class="ribbon r-rare">rare</span></div></div>
+
+      <div class="day"><span class="dow">Sun · Jul&nbsp;05</span><span class="date">05</span><div class="drop"><div class="drop-name">Tide Pool · weekend</div><div class="drop-meta">EU · 11:00 CET · 800</div><span class="ribbon r-epic">epic</span></div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>The Vault is a <span class="mark">speculative spec</span> by Globsense Reel.</p>
+  <p>Unaffiliated with Pop Mart. Abstract figures · no real IP.</p>
+</footer>
+
+<!-- Concept stamp -->
+<a href="../" class="reel-stamp" target="_top">
+  <span class="accent">●</span>&nbsp;Concept · Unaffiliated · Globsense Reel 2026
+</a>
+
+<a href="../" class="back-to-reel">← back to reel</a>
+
+<script>
+/* ───────────── Hunter scripted conversation ───────────── */
+const HUNTER = [
+  { msg: "I found <b>3 Aurora Whisper</b> figures available in Berlin this week.",  agent:true },
+  { msg: "One is priced at <b>€72</b> (above your alert of €50). Two are at <b>€48</b> and <b>€51</b> — flag for purchase?", agent:true,
+    actions: [
+      {label:"Buy both", style:"primary", reply:"Yes — buy both at the lower prices."},
+      {label:"Just €48", reply:"Just take the €48 one. Save room in the budget."},
+      {label:"Wait",  reply:"Wait. The mythic drop is tomorrow."},
+      {label:"Raise ceiling to €75", reply:"Raise my Aurora ceiling to €75."}
+    ]
+  },
+  { msg: "Done. Reserved the €48 and €51. Also — <b>Mira (Tokyo)</b> has a duplicate Pearl Diver. She's offered to trade for your spare Mountain Sleep + €15.", agent:true,
+    actions: [
+      {label:"Accept", style:"primary", reply:"Accept the trade. Mira's reputation is gold."},
+      {label:"Counter", reply:"Counter — Pearl Diver for Mountain Sleep, no cash."},
+      {label:"Decline", reply:"Decline. I'm not letting Mountain Sleep go."}
+    ]
+  },
+  { msg: "Trade accepted. Mira will ship Friday. Your shelf will go from 7 to <b>9 figures</b>. One more thing — tomorrow's Folded Dragon v2 drops at 20:00 CST. You're not in queue yet.", agent:true,
+    actions: [
+      {label:"Auto-queue me", style:"primary", reply:"Auto-queue. Maximum 1 unit. Ceiling €90."},
+      {label:"Skip",   reply:"Skip. Already have v1."}
+    ]
+  },
+  { msg: "Queued. I'll wake you only if it pulls. Have a quiet morning.", agent:true,
+    actions: [{label:"Thanks", style:"primary", reply:"Thanks. Goodnight, Hunter.", final:true}]
+  },
+  { msg: "Goodnight. Vault locked. 7 figures safe. 2 inbound. 1 hunt active.", agent:true, final:true }
+];
+
+let hunterStep = 0;
+const body = document.getElementById('chatBody');
+const actionsBar = document.getElementById('chatActions');
+
+function renderActions(actions){
+  actionsBar.innerHTML = '';
+  actions.forEach(a => {
+    const b = document.createElement('button');
+    if(a.style) b.classList.add(a.style);
+    b.textContent = a.label;
+    b.onclick = () => pickAction(a);
+    actionsBar.appendChild(b);
+  });
+}
+function continueButton(label='Continue ↓', final=false){
+  actionsBar.innerHTML = '';
+  const b = document.createElement('button');
+  b.classList.add('primary');
+  b.textContent = final ? 'Conversation complete' : label;
+  if(final) b.disabled = true;
+  else b.onclick = advanceHunter;
+  actionsBar.appendChild(b);
+}
+function appendMsg(html, who){
+  const d = document.createElement('div');
+  d.className = 'msg ' + who;
+  d.innerHTML = html;
+  body.appendChild(d);
+  body.scrollTop = body.scrollHeight;
+}
+function advanceHunter(){
+  if(hunterStep >= HUNTER.length) return;
+  const step = HUNTER[hunterStep++];
+  appendMsg(step.msg, step.agent ? 'agent' : 'user');
+  if(step.actions) renderActions(step.actions);
+  else if(step.final) continueButton('done', true);
+  else continueButton();
+}
+function pickAction(a){
+  appendMsg(a.reply, 'user');
+  actionsBar.innerHTML = '';
+  setTimeout(() => {
+    if(a.final){ continueButton('done', true); return; }
+    advanceHunter();
+  }, 600);
+}
+advanceHunter();
+
+/* ───────────── Trade graph (lightweight SVG, no force engine) ───────────── */
+const NODES = [
+  {id:'you',  x:550, y:240, r:24, color:'#FF7AB6', label:'You',  loc:'Shanghai · 7 figures', glow:true},
+  {id:'mira', x:740, y:140, r:15, color:'#B5A3FF', label:'Mira', loc:'Tokyo · offered Pearl Diver'},
+  {id:'leo',  x:360, y:120, r:15, color:'#B5A3FF', label:'Leo',  loc:'Berlin · wants Aurora Whisper'},
+  {id:'an',   x:820, y:340, r:13, color:'#8FD4C1', label:'An',   loc:'Hanoi · wishlist match: Tide Pool'},
+  {id:'ka',   x:230, y:330, r:13, color:'#8FD4C1', label:'Kai',  loc:'Madrid · wishlist match: Lantern Frog'},
+  {id:'no',   x:920, y:80 , r:9,  color:'#C8D4E0', label:'Nora', loc:'Seoul · in your 2nd-degree network'},
+  {id:'sa',   x:120, y:200, r:9,  color:'#C8D4E0', label:'Sami', loc:'Mexico City · network'},
+  {id:'ja',   x:980, y:240, r:9,  color:'#C8D4E0', label:'Jad',  loc:'Beirut · network'},
+  {id:'el',   x:140, y:80 , r:9,  color:'#C8D4E0', label:'Elo',  loc:'Lyon · network'},
+  {id:'ya',   x:500, y:430, r:9,  color:'#C8D4E0', label:'Yana', loc:'Kyiv · network'},
+  {id:'ru',   x:680, y:430, r:9,  color:'#C8D4E0', label:'Rumi', loc:'Bangkok · network'},
+  {id:'fe',   x:320, y:380, r:9,  color:'#C8D4E0', label:'Fela', loc:'Lagos · network'},
+];
+const EDGES = [
+  {a:'you', b:'mira', trade:'Mountain Sleep + €15 ⇌ Pearl Diver', active:true},
+  {a:'you', b:'leo',  trade:'Aurora Whisper (Leo wants) ⇌ Tide Pool', active:true},
+  {a:'you', b:'an',   trade:'Tide Pool (proposed)'},
+  {a:'you', b:'ka',   trade:'Lantern Frog (proposed)'},
+  {a:'mira',b:'no'},
+  {a:'mira',b:'ja'},
+  {a:'leo', b:'el'},
+  {a:'leo', b:'sa'},
+  {a:'an',  b:'ru'},
+  {a:'ka',  b:'fe'},
+  {a:'ka',  b:'ya'},
+  {a:'no',  b:'ja'},
+];
+const svg = document.getElementById('graph');
+const tip = document.getElementById('tip');
+const wrap = svg.parentElement;
+
+function nodeById(id){ return NODES.find(n=>n.id===id); }
+
+// SVG defs for glow filter
+const defs = document.createElementNS('http://www.w3.org/2000/svg','defs');
+defs.innerHTML = `
+  <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="3" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <filter id="bigGlow" x="-50%" y="-50%" width="200%" height="200%">
+    <feGaussianBlur stdDeviation="6" result="blur"/>
+    <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+`;
+svg.appendChild(defs);
+
+// edges
+EDGES.forEach((e) => {
+  const A = nodeById(e.a), B = nodeById(e.b);
+  const l = document.createElementNS('http://www.w3.org/2000/svg','line');
+  l.setAttribute('x1', A.x); l.setAttribute('y1', A.y);
+  l.setAttribute('x2', B.x); l.setAttribute('y2', B.y);
+  l.setAttribute('stroke', e.active ? '#FF7AB6' : 'rgba(255,255,255,0.10)');
+  l.setAttribute('stroke-width', e.active ? 1.6 : 1);
+  l.setAttribute('stroke-linecap','round');
+  if(e.active){
+    l.setAttribute('stroke-dasharray','6 8');
+    l.setAttribute('filter','url(#glow)');
+    const an = document.createElementNS('http://www.w3.org/2000/svg','animate');
+    an.setAttribute('attributeName','stroke-dashoffset');
+    an.setAttribute('from','0'); an.setAttribute('to','-28');
+    an.setAttribute('dur','2s'); an.setAttribute('repeatCount','indefinite');
+    l.appendChild(an);
+  }
+  svg.appendChild(l);
+});
+
+// nodes
+NODES.forEach(n => {
+  const g = document.createElementNS('http://www.w3.org/2000/svg','g');
+
+  // outer halo
+  const halo = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  halo.setAttribute('cx',n.x); halo.setAttribute('cy',n.y);
+  halo.setAttribute('r', n.r + 10);
+  halo.setAttribute('fill','none');
+  halo.setAttribute('stroke', n.color);
+  halo.setAttribute('stroke-opacity', n.glow ? '0.35' : '0.15');
+  halo.setAttribute('stroke-width','1');
+  g.appendChild(halo);
+
+  // inner soft glow
+  if(n.glow){
+    const glow = document.createElementNS('http://www.w3.org/2000/svg','circle');
+    glow.setAttribute('cx',n.x); glow.setAttribute('cy',n.y);
+    glow.setAttribute('r', n.r + 4);
+    glow.setAttribute('fill', n.color);
+    glow.setAttribute('opacity','0.25');
+    glow.setAttribute('filter','url(#bigGlow)');
+    g.appendChild(glow);
+  }
+
+  const c = document.createElementNS('http://www.w3.org/2000/svg','circle');
+  c.setAttribute('cx',n.x); c.setAttribute('cy',n.y); c.setAttribute('r', n.r);
+  c.setAttribute('fill', n.color);
+  c.setAttribute('stroke','#0E0E18');
+  c.setAttribute('stroke-width','2');
+  c.style.cursor = 'pointer';
+  c.style.transition = 'transform .2s';
+  if(n.glow) c.setAttribute('filter','url(#glow)');
+  g.appendChild(c);
+
+  // label
+  const t = document.createElementNS('http://www.w3.org/2000/svg','text');
+  t.setAttribute('x', n.x); t.setAttribute('y', n.y + n.r + 20);
+  t.setAttribute('text-anchor','middle');
+  t.setAttribute('fill','rgba(255,255,255,0.78)');
+  t.setAttribute('font-size','12');
+  t.setAttribute('font-family','JetBrains Mono, monospace');
+  t.setAttribute('font-weight','600');
+  t.textContent = n.label;
+  g.appendChild(t);
+
+  const linkedEdges = EDGES.filter(e=>e.a===n.id || e.b===n.id).map(e=>e.trade).filter(Boolean);
+
+  g.addEventListener('mouseenter', () => {
+    const pt = svg.getBoundingClientRect();
+    const rect = wrap.getBoundingClientRect();
+    const sx = pt.width / 1100;
+    const sy = pt.height / 480;
+    tip.style.left = (pt.left - rect.left + n.x*sx) + 'px';
+    tip.style.top  = (pt.top  - rect.top  + n.y*sy) + 'px';
+    let html = '<b>'+n.label+'</b><span class="loc">'+n.loc+'</span>';
+    if(linkedEdges.length){
+      html += linkedEdges.map(t=>'<span class="trade">↳ '+t+'</span>').join('');
+    }
+    tip.innerHTML = html;
+    tip.style.opacity = '1';
+    c.setAttribute('r', n.r + 2);
+  });
+  g.addEventListener('mouseleave', () => {
+    tip.style.opacity = '0';
+    c.setAttribute('r', n.r);
+  });
+
+  svg.appendChild(g);
+});
+
+/* tiny ambient drift */
+let t0 = 0;
+function drift(){
+  t0 += 0.008;
+  Array.from(svg.querySelectorAll('g')).forEach((g,i) => {
+    const dx = Math.sin(t0 + i*0.7) * 1.4;
+    const dy = Math.cos(t0 + i*0.5) * 1.4;
+    g.setAttribute('transform', `translate(${dx} ${dy})`);
+  });
+  requestAnimationFrame(drift);
+}
+drift();
+
+/* smooth scroll for nav */
+document.querySelectorAll('.nav a').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const tgt = document.querySelector(a.getAttribute('href'));
+    if(tgt) tgt.scrollIntoView({behavior:'smooth', block:'start'});
+  });
+});
+</script>
+</body>
+</html>

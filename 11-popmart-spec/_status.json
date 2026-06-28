@@ -1,9 +1,10 @@
 {
-  "status": "pending",
-  "worker_model": null,
-  "session_url": null,
-  "updated_at": "2026-06-28T12:21:23.799241Z",
+  "status": "built",
+  "worker_model": "claude-opus-4-7",
+  "session_url": "webui:af301fe5349a",
+  "updated_at": "2026-06-28T13:05:00Z",
   "build_time_seconds": null,
   "needs_review": false,
-  "notes": ""
+  "needs_deploy": true,
+  "notes": "Pop Mart Vault concept spec. Hero (3 abstract floating figures) + 8-shelf 3D rail + Hunter chat (6-turn scripted, branching actions) + 12-node animated SVG trade graph + 7-day drop calendar + concept stamp. Single self-contained index.html, ~39KB, no build deps. Abstract geometric stand-in figures — no real Pop Mart IP."
 }
