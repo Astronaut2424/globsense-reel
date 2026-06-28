@@ -3,7 +3,8 @@
   "title": "HEYTEA · Soho",
   "subtitle": "Spec microsite for a London flagship — Monocle-grade editorial",
   "status": "built",
-  "needs_deploy": true,
+  "needs_deploy": false,
+  "deployed_url": "https://astronaut2424.github.io/globsense-reel/12-heytea-spec/",
   "model": "kimi-k2.6",
   "built_at": "2026-06-28",
   "files": [
