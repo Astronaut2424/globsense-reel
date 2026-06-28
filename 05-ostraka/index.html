@@ -1,14 +1,985 @@
-<!doctype html><html><head><meta charset="utf-8"><title>Ostraka — pending</title>
-<link rel="stylesheet" href="../_shared/tokens.css">
-<style>body{display:grid;place-items:center;min-height:100vh;text-align:center;padding:40px;}
-h1{font-family:var(--font-display);font-size:var(--t-display);}
-.tag{font-family:var(--font-mono);font-size:var(--t-micro);text-transform:uppercase;letter-spacing:.2em;color:var(--brand-accent);}
-.lede{color:var(--text-d-body);max-width:540px;margin:24px auto;}</style>
-</head><body>
-<div>
-<div class="tag">#05 · pending build</div>
-<h1>Ostraka</h1>
-<p class="lede">Generative-art gallery. AI × human, minted and exhibited.</p>
-<a class="back-to-reel" href="../">← back to reel</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>OSTRAKA — where the prompt becomes the artifact</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=JetBrains+Mono:wght@300;400;500;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0a0907;
+  --ink-2:#13110d;
+  --ink-3:#1d1a14;
+  --line:#3a342a;
+  --bone:#f4ede1;
+  --bone-2:#e8dfcc;
+  --paper:#fbf7ee;
+  --paper-2:#ede5d2;
+  --gilt:#c8a558;
+  --gilt-2:#e6c98a;
+  --vermilion:#c1432b;
+  --cobalt:#2c3a6b;
+  --moss:#5a6b3a;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:var(--ink);color:var(--bone);font-family:'Fraunces',serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+::selection{background:var(--gilt);color:var(--ink)}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+/* ── grain ───────────────────────────────────── */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:200;mix-blend-mode:overlay;opacity:.35;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.95  0 0 0 0 0.92  0 0 0 0 0.85  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* ── nav ───────────────────────────────────── */
+nav.top{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  padding:22px 48px;display:flex;justify-content:space-between;align-items:center;
+  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.22em;text-transform:uppercase;
+  background:linear-gradient(to bottom,rgba(10,9,7,.85),rgba(10,9,7,0));
+}
+nav.top .mark{font-family:'Fraunces',serif;font-weight:600;font-size:18px;letter-spacing:.38em;text-transform:uppercase;color:var(--bone)}
+nav.top .mark::after{content:"·";margin-left:14px;color:var(--gilt)}
+nav.top ul{display:flex;gap:36px;list-style:none}
+nav.top ul a{color:var(--bone-2);opacity:.7;transition:opacity .3s,color .3s;position:relative}
+nav.top ul a:hover{opacity:1;color:var(--gilt-2)}
+nav.top .meta{display:flex;gap:18px;align-items:center;color:var(--bone-2);opacity:.7;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em}
+nav.top .dot{width:6px;height:6px;background:var(--gilt);border-radius:50%;animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.4;transform:scale(.7)}}
+
+/* ── hero ───────────────────────────────────── */
+section.hero{
+  min-height:100vh;position:relative;
+  display:grid;grid-template-columns:1fr;align-items:end;
+  padding:0 48px 64px;overflow:hidden;
+  background:radial-gradient(120% 80% at 70% 20%,#1c1813 0%,#0a0907 55%,#050402 100%);
+}
+.hero .corridor{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 50%,rgba(244,237,225,.06),transparent 60%),
+    repeating-linear-gradient(90deg,transparent 0,transparent 119px,rgba(244,237,225,.025) 120px);
+}
+.hero .doorway{
+  position:absolute;top:50%;left:75%;transform:translate(-50%,-50%);
+  width:340px;height:520px;
+  background:linear-gradient(180deg,#f4ede1 0%,#e8dfcc 60%,#d2c7af 100%);
+  box-shadow:
+    0 0 80px rgba(244,237,225,.4),
+    0 0 200px rgba(244,237,225,.25),
+    inset 0 0 60px rgba(244,237,225,.6);
+  opacity:.92;
+}
+.hero .doorway::before{
+  content:"";position:absolute;inset:24px;border:1px solid rgba(10,9,7,.08);
+}
+.hero .doorway::after{
+  content:"";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);
+  width:60%;height:60%;
+  background:
+    radial-gradient(circle at 30% 30%,var(--vermilion) 0,transparent 30%),
+    radial-gradient(circle at 70% 70%,var(--cobalt) 0,transparent 35%),
+    radial-gradient(circle at 50% 50%,var(--gilt) 0,transparent 25%);
+  filter:blur(8px);opacity:.45;
+}
+.hero h1{
+  font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;
+  font-size:clamp(72px,17vw,260px);line-height:.86;letter-spacing:-.04em;
+  color:var(--bone);position:relative;z-index:2;
+  text-shadow:0 0 80px rgba(10,9,7,.6);
+}
+.hero h1 .o-1{display:inline-block;position:relative}
+.hero h1 .o-1::after{
+  content:"";position:absolute;left:14%;top:18%;width:72%;height:64%;
+  border-radius:50%;border:1px solid var(--gilt);opacity:.5;
+  animation:rot 12s linear infinite;
+}
+@keyframes rot{to{transform:rotate(360deg)}}
+.hero .tag{
+  position:relative;z-index:2;margin-top:32px;
+  font-family:'Fraunces',serif;font-style:italic;font-weight:300;
+  font-size:clamp(20px,2.2vw,32px);color:var(--bone-2);
+  max-width:640px;line-height:1.35;
+}
+.hero .tag em{color:var(--gilt-2);font-style:italic}
+.hero .meta-row{
+  position:absolute;bottom:48px;left:48px;right:48px;
+  display:flex;justify-content:space-between;align-items:flex-end;
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.2em;
+  text-transform:uppercase;color:var(--bone-2);opacity:.55;z-index:3;
+}
+.hero .meta-row .col{display:flex;flex-direction:column;gap:6px}
+.hero .meta-row .col strong{color:var(--gilt-2);font-weight:400;letter-spacing:.25em}
+.hero .scroll-cue{
+  position:absolute;left:50%;bottom:24px;transform:translateX(-50%);
+  font-family:'Inter',sans-serif;font-size:9px;letter-spacing:.4em;color:var(--bone-2);opacity:.4;
+  writing-mode:vertical-rl;text-transform:uppercase;
+}
+.hero .ed-stamp{
+  position:absolute;top:140px;right:48px;
+  width:130px;height:130px;border:1px solid var(--gilt);border-radius:50%;
+  display:grid;place-items:center;font-family:'JetBrains Mono',monospace;
+  font-size:10px;color:var(--gilt-2);letter-spacing:.18em;text-align:center;line-height:1.4;
+  opacity:.7;animation:rot 60s linear infinite;
+}
+.ed-stamp svg{position:absolute;inset:0;width:100%;height:100%}
+.ed-stamp svg text{fill:var(--gilt-2);font-family:'JetBrains Mono',monospace;font-size:8px;letter-spacing:.2em}
+
+/* ── section header  ───────────────────────────────────── */
+.shead{
+  display:grid;grid-template-columns:auto 1fr auto;gap:32px;align-items:center;
+  padding:24px 48px;border-top:1px solid var(--line);
+  font-family:'Inter',sans-serif;font-size:11px;letter-spacing:.28em;text-transform:uppercase;
+  color:var(--bone-2);
+}
+.shead .num{font-family:'JetBrains Mono',monospace;color:var(--gilt-2);font-size:12px;letter-spacing:.15em}
+.shead .line{height:1px;background:var(--line)}
+.shead .right{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--bone-2);opacity:.55;letter-spacing:.18em}
+
+/* ── featured grid ───────────────────────────────────── */
+section.featured{padding:48px;background:var(--ink);position:relative}
+.featured-title{
+  display:flex;justify-content:space-between;align-items:baseline;margin-bottom:48px;
+}
+.featured-title h2{
+  font-family:'Fraunces',serif;font-weight:300;font-size:clamp(40px,6vw,86px);
+  letter-spacing:-.025em;line-height:1;color:var(--bone);
+}
+.featured-title h2 em{font-style:italic;color:var(--gilt-2);font-weight:300}
+.featured-title .blurb{
+  max-width:380px;font-family:'Fraunces',serif;font-size:15px;line-height:1.6;
+  color:var(--bone-2);opacity:.7;
+}
+.tiles{
+  display:grid;grid-template-columns:1.4fr 1fr 1fr 1.4fr;gap:14px;height:78vh;min-height:560px;
+}
+.tile{
+  position:relative;overflow:hidden;background:var(--ink-2);cursor:crosshair;
+  border:1px solid var(--line);
+  transition:flex-grow .6s ease, border-color .4s;
+}
+.tile .canvas{position:absolute;inset:0;transition:transform 1.2s cubic-bezier(.2,.7,.1,1),filter .6s}
+.tile:hover .canvas{transform:scale(1.04);filter:brightness(1.1) saturate(1.2)}
+.tile:hover{border-color:var(--gilt)}
+.tile .label{
+  position:absolute;bottom:0;left:0;right:0;padding:20px 22px;z-index:3;
+  background:linear-gradient(180deg,transparent 0%,rgba(10,9,7,.92) 60%);
+}
+.tile .num{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gilt-2);letter-spacing:.22em;margin-bottom:8px;display:block}
+.tile .title{font-family:'Fraunces',serif;font-weight:400;font-style:italic;font-size:22px;color:var(--bone);line-height:1.15;margin-bottom:6px}
+.tile .by{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--bone-2);opacity:.75;letter-spacing:.12em;text-transform:uppercase}
+.tile .trace{
+  position:absolute;top:0;right:0;bottom:0;left:0;z-index:2;
+  background:rgba(10,9,7,.88);opacity:0;transition:opacity .5s;
+  display:grid;place-items:center;padding:24px;
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bone-2);
+  line-height:1.7;letter-spacing:.04em;
+}
+.tile:hover .trace{opacity:1;animation:traceFlicker .25s steps(2,end) infinite}
+@keyframes traceFlicker{50%{filter:hue-rotate(15deg) brightness(1.1)}}
+.tile .trace .ln{display:block;opacity:0;animation:traceLine .3s forwards}
+.tile:hover .trace .ln:nth-child(1){animation-delay:.05s}
+.tile:hover .trace .ln:nth-child(2){animation-delay:.18s}
+.tile:hover .trace .ln:nth-child(3){animation-delay:.32s}
+.tile:hover .trace .ln:nth-child(4){animation-delay:.48s}
+.tile:hover .trace .ln:nth-child(5){animation-delay:.66s}
+.tile:hover .trace .ln:nth-child(6){animation-delay:.84s}
+.tile:hover .trace .ln:nth-child(7){animation-delay:1.02s}
+@keyframes traceLine{to{opacity:1}}
+.tile .trace .ln em{color:var(--gilt-2);font-style:normal}
+.tile .trace .ln .add{color:#7eb87e}
+.tile .trace .ln .rem{color:var(--vermilion);text-decoration:line-through}
+
+/* art canvases */
+.c-pollen{
+  background:
+    radial-gradient(circle at 20% 30%,#d4a548 0,transparent 6%),
+    radial-gradient(circle at 35% 45%,#c1432b 0,transparent 4%),
+    radial-gradient(circle at 60% 25%,#e6c98a 0,transparent 5%),
+    radial-gradient(circle at 75% 60%,#c1432b 0,transparent 3%),
+    radial-gradient(circle at 40% 75%,#d4a548 0,transparent 7%),
+    radial-gradient(circle at 65% 85%,#e6c98a 0,transparent 4%),
+    radial-gradient(circle at 85% 40%,#c1432b 0,transparent 5%),
+    radial-gradient(circle at 15% 70%,#e6c98a 0,transparent 4%),
+    radial-gradient(circle at 90% 90%,#d4a548 0,transparent 6%),
+    linear-gradient(135deg,#1a1612,#2d2418);
+}
+.c-strata{
+  background:
+    repeating-linear-gradient(180deg,
+      #2c3a6b 0px,#2c3a6b 28px,
+      #3a4a7a 28px,#3a4a7a 36px,
+      #1a2545 36px,#1a2545 78px,
+      #4a5a8a 78px,#4a5a8a 84px,
+      #0d1530 84px,#0d1530 142px,
+      #5a6a9a 142px,#5a6a9a 148px,
+      #1a2545 148px,#1a2545 220px),
+    linear-gradient(90deg,transparent 60%,rgba(10,9,7,.6));
+}
+.c-still{
+  background:
+    radial-gradient(ellipse 70% 50% at 50% 60%,#5a6b3a 0,#3a4a25 40%,transparent 70%),
+    radial-gradient(ellipse 40% 30% at 50% 60%,#8a9a5a 0,transparent 60%),
+    radial-gradient(circle at 50% 35%,#e6c98a 0,transparent 8%),
+    linear-gradient(180deg,#13110d 0%,#1d1a14 40%,#0a0907 100%);
+}
+.c-litany{
+  background:
+    repeating-linear-gradient(0deg,transparent 0,transparent 11px,rgba(244,237,225,.18) 12px,rgba(244,237,225,.18) 13px),
+    repeating-linear-gradient(90deg,transparent 0,transparent 7px,rgba(244,237,225,.06) 8px),
+    linear-gradient(135deg,#1a1612,#0a0907);
+}
+
+/* ── deep dive ───────────────────────────────────── */
+section.deep{
+  padding:120px 0;background:var(--ink);position:relative;
+  border-top:1px solid var(--line);
+}
+.deep .container{max-width:1440px;margin:0 auto;padding:0 48px}
+.deep .eyebrow{
+  font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--gilt-2);
+  text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:14px;
+}
+.deep .eyebrow::before{content:"";width:42px;height:1px;background:var(--gilt-2)}
+.deep h2{
+  font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;
+  font-size:clamp(48px,8vw,132px);line-height:.94;letter-spacing:-.035em;
+  margin-bottom:24px;color:var(--bone);
+}
+.deep h2 em{font-style:italic;color:var(--gilt-2);font-weight:300}
+.deep .by-line{
+  font-family:'JetBrains Mono',monospace;font-size:13px;color:var(--bone-2);letter-spacing:.1em;
+  margin-bottom:80px;line-height:1.8;
+}
+.deep .by-line span{color:var(--gilt-2)}
+.deep .by-line .x{margin:0 14px;color:var(--line)}
+
+.deep-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:56px;margin-bottom:96px}
+.work-frame{
+  aspect-ratio:4/5;position:relative;background:var(--ink-2);
+  border:1px solid var(--line);overflow:hidden;
+}
+.work-frame .matte{
+  position:absolute;inset:32px;background:var(--ink);overflow:hidden;
+  box-shadow:inset 0 0 0 1px rgba(244,237,225,.08),0 0 50px rgba(0,0,0,.6);
+}
+.work-frame .art{
+  position:absolute;inset:0;
+}
+.work-frame .corner{
+  position:absolute;width:36px;height:36px;border:1px solid var(--gilt);opacity:.6;
+}
+.work-frame .corner.tl{top:12px;left:12px;border-right:none;border-bottom:none}
+.work-frame .corner.tr{top:12px;right:12px;border-left:none;border-bottom:none}
+.work-frame .corner.bl{bottom:12px;left:12px;border-right:none;border-top:none}
+.work-frame .corner.br{bottom:12px;right:12px;border-left:none;border-top:none}
+.work-frame .plaque{
+  position:absolute;left:32px;right:32px;bottom:-20px;background:var(--bone);color:var(--ink);
+  padding:18px 22px;font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;display:flex;justify-content:space-between;
+}
+.work-frame .plaque .title-it{font-family:'Fraunces',serif;font-style:italic;font-size:13px;text-transform:none;letter-spacing:0;font-weight:500}
+
+.pollen-art{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse 50% 70% at 50% 55%,#1a1612 0%,#0a0907 100%);
+}
+.pollen-art svg{position:absolute;inset:0;width:100%;height:100%}
+
+.deep-side{display:flex;flex-direction:column;gap:40px;padding-top:32px}
+.prompt-card{
+  background:var(--ink-2);border:1px solid var(--line);padding:32px;position:relative;
+}
+.prompt-card .lbl{
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.28em;color:var(--gilt-2);
+  text-transform:uppercase;margin-bottom:18px;display:flex;justify-content:space-between;
+}
+.prompt-card .lbl span:last-child{color:var(--bone-2);opacity:.6}
+.prompt-card .pmt{
+  font-family:'Fraunces',serif;font-style:italic;font-weight:400;font-size:22px;line-height:1.45;
+  color:var(--bone);
+}
+.prompt-card .pmt mark{background:transparent;color:var(--gilt-2);font-style:italic}
+.prompt-card .pmt .strike{text-decoration:line-through;color:var(--vermilion);opacity:.7}
+.prompt-card .pmt .ins{color:#9bb78a;border-bottom:1px dashed #9bb78a}
+.prompt-card .seed{
+  margin-top:24px;padding-top:18px;border-top:1px dashed var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--bone-2);opacity:.7;
+  display:flex;justify-content:space-between;letter-spacing:.05em;
+}
+
+.edits{display:flex;flex-direction:column;gap:20px}
+.edit-row{
+  display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:start;
+  padding-bottom:20px;border-bottom:1px solid var(--line);
+}
+.edit-row:last-child{border-bottom:none}
+.edit-num{
+  font-family:'Fraunces',serif;font-weight:300;font-size:48px;line-height:1;color:var(--gilt-2);
+  font-variation-settings:"opsz" 144;
+}
+.edit-body .when{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--bone-2);opacity:.55;text-transform:uppercase;margin-bottom:6px}
+.edit-body .what{font-family:'Fraunces',serif;font-size:17px;line-height:1.45;color:var(--bone);font-weight:400}
+.edit-body .what em{font-style:italic;color:var(--gilt-2)}
+
+/* mint metadata */
+.mint{
+  display:grid;grid-template-columns:1fr 1fr;gap:0;
+  margin-top:32px;border:1px solid var(--line);background:var(--ink-2);
+}
+.mint .cell{padding:24px 28px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.mint .cell:nth-child(2n){border-right:none}
+.mint .cell:nth-last-child(-n+2){border-bottom:none}
+.mint .k{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.25em;color:var(--bone-2);opacity:.55;text-transform:uppercase;margin-bottom:10px}
+.mint .v{font-family:'Fraunces',serif;font-weight:400;font-size:22px;color:var(--bone);letter-spacing:-.01em}
+.mint .v em{font-style:italic;color:var(--gilt-2)}
+.mint .v.mono{font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:.05em;color:var(--bone-2);word-break:break-all}
+
+.provenance{
+  margin-top:32px;padding:32px;background:linear-gradient(180deg,var(--ink-2),var(--ink-3));
+  border:1px solid var(--line);
+}
+.provenance .lbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.28em;color:var(--gilt-2);text-transform:uppercase;margin-bottom:24px}
+.prov-chain{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.prov-node{
+  flex:1;min-width:160px;border:1px solid var(--line);padding:16px 18px;background:var(--ink);
+  position:relative;
+}
+.prov-node .t{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.2em;color:var(--bone-2);opacity:.6;text-transform:uppercase;margin-bottom:6px}
+.prov-node .n{font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--bone);line-height:1.3}
+.prov-node .h{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--gilt-2);opacity:.65;margin-top:6px;letter-spacing:.05em}
+.prov-arr{color:var(--gilt-2);font-family:'JetBrains Mono',monospace;font-size:14px;opacity:.6}
+
+.essay{
+  margin-top:96px;display:grid;grid-template-columns:160px 1fr;gap:48px;
+}
+.essay .meta{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--bone-2);opacity:.7;line-height:1.8}
+.essay .meta span{display:block;color:var(--gilt-2)}
+.essay-body{
+  font-family:'Fraunces',serif;font-size:20px;line-height:1.6;color:var(--bone);max-width:720px;
+}
+.essay-body .dropcap{
+  float:left;font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;
+  font-size:110px;line-height:.85;padding:8px 14px 0 0;color:var(--gilt-2);
+}
+.essay-body p{margin-bottom:1.2em}
+.essay-body p em{font-style:italic;color:var(--bone-2)}
+.essay-body .sig{
+  margin-top:32px;font-family:'Fraunces',serif;font-style:italic;font-size:16px;color:var(--bone-2);
+  display:flex;align-items:center;gap:14px;
+}
+.essay-body .sig::before{content:"";display:block;width:32px;height:1px;background:var(--gilt-2)}
+
+/* ── gallery wall (white section) ───────────────────────────────────── */
+section.wall{
+  background:var(--paper);color:var(--ink);padding:120px 48px;position:relative;
+  overflow:hidden;
+}
+.wall::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%,rgba(232,223,204,.7) 0%,transparent 60%),
+    repeating-linear-gradient(90deg,transparent 0,transparent 2px,rgba(10,9,7,.015) 3px);
+  pointer-events:none;
+}
+.wall .container{max-width:1440px;margin:0 auto;position:relative}
+.wall .floor{
+  position:absolute;bottom:-120px;left:-48px;right:-48px;height:160px;
+  background:linear-gradient(180deg,rgba(10,9,7,.08),rgba(10,9,7,.18));
+  transform:perspective(800px) rotateX(78deg);transform-origin:top;
+}
+.wall .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.3em;color:var(--ink);opacity:.6;text-transform:uppercase;margin-bottom:18px;display:flex;align-items:center;gap:14px}
+.wall .eyebrow::before{content:"";width:42px;height:1px;background:var(--ink);opacity:.4}
+.wall h2{
+  font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;
+  font-size:clamp(40px,6vw,86px);line-height:.96;letter-spacing:-.025em;color:var(--ink);
+  margin-bottom:14px;
+}
+.wall h2 em{font-style:italic}
+.wall .sub{font-family:'Fraunces',serif;font-style:italic;font-size:20px;color:var(--ink);opacity:.7;max-width:560px;margin-bottom:72px}
+
+.roster{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:48px 32px;
+}
+.artist{display:flex;flex-direction:column;gap:14px;cursor:default;transition:transform .4s}
+.artist:hover{transform:translateY(-4px)}
+.portrait{
+  aspect-ratio:3/4;background:var(--paper-2);border:1px solid rgba(10,9,7,.18);
+  position:relative;overflow:hidden;
+}
+.portrait::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,transparent 0%,rgba(10,9,7,.04) 50%,transparent 100%);
+  pointer-events:none;
+}
+.p-art{position:absolute;inset:0;display:grid;place-items:center}
+
+.artist .name{font-family:'Fraunces',serif;font-weight:500;font-size:18px;color:var(--ink);letter-spacing:-.01em;line-height:1.2}
+.artist .name em{font-style:italic;color:#6a5a3a}
+.artist .meta{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.18em;color:var(--ink);opacity:.55;text-transform:uppercase;display:flex;justify-content:space-between}
+.artist .meta .dot{color:var(--vermilion);opacity:.8}
+
+/* ── CTA split ───────────────────────────────────── */
+section.cta{
+  display:grid;grid-template-columns:1fr 1fr;min-height:80vh;background:var(--ink);
+  border-top:1px solid var(--line);
+}
+.cta-half{
+  position:relative;padding:96px 64px;display:flex;flex-direction:column;justify-content:space-between;
+  border-right:1px solid var(--line);overflow:hidden;
+}
+.cta-half:last-child{border-right:none;background:linear-gradient(135deg,#0d0b08 0%,#13110d 100%)}
+.cta-half .stamp{
+  position:absolute;top:48px;right:64px;font-family:'JetBrains Mono',monospace;font-size:10px;
+  letter-spacing:.28em;color:var(--gilt-2);text-transform:uppercase;
+}
+.cta-half h3{
+  font-family:'Fraunces',serif;font-weight:300;font-variation-settings:"opsz" 144;
+  font-size:clamp(36px,5vw,72px);line-height:1;letter-spacing:-.025em;color:var(--bone);
+  margin-top:64px;
+}
+.cta-half h3 em{font-style:italic;color:var(--gilt-2)}
+.cta-half .desc{
+  font-family:'Fraunces',serif;font-size:17px;line-height:1.6;color:var(--bone-2);opacity:.8;
+  max-width:380px;margin-top:24px;
+}
+.cta-half .desc em{font-style:italic;color:var(--gilt-2);opacity:1}
+.cta-half .arrow{
+  margin-top:48px;display:inline-flex;align-items:center;gap:14px;
+  font-family:'JetBrains Mono',monospace;font-size:12px;letter-spacing:.22em;color:var(--bone);
+  text-transform:uppercase;border-bottom:1px solid var(--line);padding-bottom:14px;
+  width:fit-content;transition:gap .3s,border-color .3s;cursor:pointer;
+}
+.cta-half .arrow:hover{gap:22px;border-color:var(--gilt-2);color:var(--gilt-2)}
+.cta-half .arrow svg{transition:transform .3s}
+.cta-half .arrow:hover svg{transform:translateX(6px)}
+
+/* ── footer ───────────────────────────────────── */
+footer{
+  padding:64px 48px 32px;background:#050402;color:var(--bone-2);border-top:1px solid var(--line);
+}
+footer .row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:48px;margin-bottom:64px}
+footer .brand{font-family:'Fraunces',serif;font-weight:300;font-size:48px;letter-spacing:.04em;color:var(--bone);margin-bottom:18px}
+footer .credo{font-family:'Fraunces',serif;font-style:italic;font-size:15px;line-height:1.6;max-width:340px;opacity:.7}
+footer h4{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gilt-2);margin-bottom:18px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+footer ul a{font-family:'Fraunces',serif;font-size:15px;opacity:.7;transition:opacity .3s,color .3s}
+footer ul a:hover{opacity:1;color:var(--gilt-2)}
+footer .baseline{
+  display:flex;justify-content:space-between;padding-top:24px;border-top:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.18em;color:var(--bone-2);opacity:.55;text-transform:uppercase;
+}
+
+/* responsive */
+@media (max-width:1100px){
+  .tiles{grid-template-columns:1fr 1fr;height:auto}
+  .tile{aspect-ratio:4/5}
+  .deep-grid{grid-template-columns:1fr}
+  .roster{grid-template-columns:repeat(2,1fr)}
+  section.cta{grid-template-columns:1fr}
+  .cta-half{border-right:none;border-bottom:1px solid var(--line)}
+  footer .row{grid-template-columns:1fr 1fr}
+  .essay{grid-template-columns:1fr}
+  .essay .meta{margin-bottom:24px}
+}
+@media (max-width:640px){
+  nav.top{padding:18px 22px}
+  nav.top ul{display:none}
+  section.hero,section.featured,.deep .container,section.wall,footer{padding-left:22px;padding-right:22px}
+  .hero .doorway{width:200px;height:320px;left:80%}
+  .hero .meta-row{display:none}
+  .tiles{grid-template-columns:1fr}
+  .roster{grid-template-columns:1fr 1fr;gap:24px}
+  .cta-half{padding:48px 24px}
+  .mint{grid-template-columns:1fr}
+  .mint .cell{border-right:none}
+  .mint .cell:not(:last-child){border-bottom:1px solid var(--line)}
+}
+</style>
+</head>
+<body>
+
+<!-- nav -->
+<nav class="top">
+  <div class="mark">OSTRAKA</div>
+  <ul>
+    <li><a href="#featured">Featured</a></li>
+    <li><a href="#deep">Deep dive</a></li>
+    <li><a href="#roster">Roster</a></li>
+    <li><a href="#collectors">Collectors</a></li>
+    <li><a href="#artists">Artists</a></li>
+  </ul>
+  <div class="meta"><span class="dot"></span><span>EX. 07 · LIVE</span><span>EST. MMXXIV</span></div>
+</nav>
+
+<!-- hero -->
+<section class="hero">
+  <div class="corridor"></div>
+  <div class="doorway"></div>
+
+  <div class="ed-stamp">
+    <svg viewBox="0 0 130 130"><defs><path id="circ" d="M65,65 m-52,0 a52,52 0 1,1 104,0 a52,52 0 1,1 -104,0"/></defs><text><textPath href="#circ" startOffset="0">EDITION · VII · MMXXVI · OSTRAKA · STUDIO · </textPath></text></svg>
+    LIVE<br>EX.07
+  </div>
+
+  <div>
+    <h1><span class="o-1">O</span>STR<br>AKA<em>.</em></h1>
+    <p class="tag">A gallery of works where the <em>prompt</em> is the artifact, the <em>trace</em> is the lineage, and the human hand is everywhere visible.</p>
+  </div>
+
+  <div class="meta-row">
+    <div class="col">
+      <span>Current</span><strong>Ex. 07 — Pollen Index</strong><span>2026 · 04 · 12 — 2026 · 06 · 30</span>
+    </div>
+    <div class="col" style="align-items:center">
+      <span>On view</span><strong>132 works · 41 artists</strong><span>across 9 collaborative pairings</span>
+    </div>
+    <div class="col" style="align-items:flex-end">
+      <span>Provenance</span><strong>fully traced</strong><span>process · prompt · edit · mint</span>
+    </div>
+  </div>
+
+  <div class="scroll-cue">ENTER ↓ THE ROOM</div>
+</section>
+
+<!-- section head: featured -->
+<div class="shead" id="featured">
+  <span class="num">§ 01</span>
+  <span>Featured Now — Hover to See the Process Trace</span>
+  <div class="line"></div>
+  <span class="right">04 / 132 · UPDATED 04·14·2026</span>
 </div>
-</body></html>
+
+<!-- featured tiles -->
+<section class="featured">
+  <div class="featured-title">
+    <h2>Each work, <em>shown twice</em>.<br>The artifact, and the <em>becoming</em>.</h2>
+    <p class="blurb">Move your cursor across any tile. The image dissolves into its process trace — the prompt fragments, the diff frames, the moment the human stepped in.</p>
+  </div>
+
+  <div class="tiles">
+    <article class="tile">
+      <div class="canvas c-pollen"></div>
+      <div class="trace">
+        <div>
+          <span class="ln">› <em>SEED</em> 0x7f3a · 4096 × 5120</span>
+          <span class="ln">› PROMPT: "a field of yellow <span class="rem">flowers</span> <span class="add">pollen suspended midair</span>"</span>
+          <span class="ln">› MODEL: <em>MJ_V11.2_oct</em></span>
+          <span class="ln">› ITER: 142 generations</span>
+          <span class="ln">› HUMAN_PASS_01: cropped 38%</span>
+          <span class="ln">› HUMAN_PASS_02: vermillion shifted +14°</span>
+          <span class="ln">› STATE: <em>final · minted</em></span>
+        </div>
+      </div>
+      <div class="label">
+        <span class="num">№ 037 / 132</span>
+        <div class="title">Pollen Index</div>
+        <div class="by">Yuki Tanaka × MJ V11.2 × Globsense</div>
+      </div>
+    </article>
+
+    <article class="tile">
+      <div class="canvas c-strata"></div>
+      <div class="trace">
+        <div>
+          <span class="ln">› <em>SEED</em> 0xbe09 · 3072 × 5120</span>
+          <span class="ln">› PROMPT: "<span class="rem">geological</span> <span class="add">stratigraphic</span> cross-section, cobalt"</span>
+          <span class="ln">› MODEL: <em>FLUX.1_PRO + SDXL refiner</em></span>
+          <span class="ln">› ITER: 89 generations</span>
+          <span class="ln">› HUMAN_PASS_01: layer 4 inverted</span>
+          <span class="ln">› HUMAN_PASS_02: noise grain +0.18</span>
+          <span class="ln">› STATE: <em>final · ed. 1/3</em></span>
+        </div>
+      </div>
+      <div class="label">
+        <span class="num">№ 088 / 132</span>
+        <div class="title">Stratum, no. 4</div>
+        <div class="by">M. Adeyemi × FLUX × Globsense</div>
+      </div>
+    </article>
+
+    <article class="tile">
+      <div class="canvas c-still"></div>
+      <div class="trace">
+        <div>
+          <span class="ln">› <em>SEED</em> 0x4422 · 4096 × 4096</span>
+          <span class="ln">› PROMPT: "still life, moss, single <span class="rem">lemon</span> <span class="add">quince</span>"</span>
+          <span class="ln">› MODEL: <em>DALL-E 4 + inpainted</em></span>
+          <span class="ln">› ITER: 211 generations</span>
+          <span class="ln">› HUMAN_PASS_01: lemon → quince</span>
+          <span class="ln">› HUMAN_PASS_02: top light, hand-painted</span>
+          <span class="ln">› STATE: <em>final · unique</em></span>
+        </div>
+      </div>
+      <div class="label">
+        <span class="num">№ 102 / 132</span>
+        <div class="title">A Quince, Studied</div>
+        <div class="by">Eitan Reuven × DALL-E 4 × Globsense</div>
+      </div>
+    </article>
+
+    <article class="tile">
+      <div class="canvas c-litany"></div>
+      <div class="trace">
+        <div>
+          <span class="ln">› <em>SEED</em> 0xc0de · 8192 × 2048</span>
+          <span class="ln">› PROMPT: "the litany of <span class="rem">numbers</span> <span class="add">small failures</span>"</span>
+          <span class="ln">› MODEL: <em>custom-trained · LoRA_07</em></span>
+          <span class="ln">› ITER: 1,408 generations</span>
+          <span class="ln">› HUMAN_PASS_01: hand-typeset overlay</span>
+          <span class="ln">› HUMAN_PASS_02: bleed +6px, ink density 0.9</span>
+          <span class="ln">› STATE: <em>final · ed. 1/12</em></span>
+        </div>
+      </div>
+      <div class="label">
+        <span class="num">№ 121 / 132</span>
+        <div class="title">A Litany of Small Failures</div>
+        <div class="by">Park So-young × LoRA-07 × Globsense</div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- section head: deep -->
+<div class="shead" id="deep">
+  <span class="num">§ 02</span>
+  <span>The Deep Dive — One Work, Fully Traced</span>
+  <div class="line"></div>
+  <span class="right">№ 037 · POLLEN INDEX</span>
+</div>
+
+<!-- deep dive -->
+<section class="deep">
+  <div class="container">
+    <div class="eyebrow">Featured work · 037 / 132 · in the room</div>
+    <h2>Pollen <em>Index</em>.</h2>
+    <p class="by-line">
+      <span>Yuki Tanaka</span> <span class="x">×</span> <span>MidJourney V11.2</span> <span class="x">×</span> <span>Globsense Studio</span><br>
+      Tokyo · Kyoto · Shanghai · April 2026 · Edition of 7, plus 2 artist proofs.
+    </p>
+
+    <div class="deep-grid">
+      <div class="work-frame">
+        <div class="matte">
+          <div class="pollen-art">
+            <svg viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+              <defs>
+                <radialGradient id="bloom" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#e6c98a" stop-opacity="0.95"/>
+                  <stop offset="40%" stop-color="#c1432b" stop-opacity="0.6"/>
+                  <stop offset="100%" stop-color="#c1432b" stop-opacity="0"/>
+                </radialGradient>
+                <radialGradient id="grain" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="#d4a548" stop-opacity="1"/>
+                  <stop offset="100%" stop-color="#d4a548" stop-opacity="0"/>
+                </radialGradient>
+                <filter id="soft"><feGaussianBlur stdDeviation="0.6"/></filter>
+              </defs>
+              <rect width="400" height="500" fill="#1a1612"/>
+              <!-- atmospheric haze -->
+              <ellipse cx="200" cy="280" rx="220" ry="160" fill="url(#bloom)" opacity="0.4"/>
+              <ellipse cx="160" cy="200" rx="140" ry="100" fill="#c1432b" opacity="0.15"/>
+              <!-- pollen grains (procedural) -->
+              <g id="pollen-cluster" filter="url(#soft)">
+                <!-- pre-rendered cluster -->
+              </g>
+              <script type="application/dontrun">
+                // For static page; below circles are hand-placed
+              </script>
+              <!-- large dots -->
+              <circle cx="120" cy="180" r="2.4" fill="#e6c98a"/>
+              <circle cx="180" cy="220" r="1.8" fill="#d4a548"/>
+              <circle cx="240" cy="190" r="2.1" fill="#e6c98a"/>
+              <circle cx="290" cy="240" r="1.6" fill="#c1432b"/>
+              <circle cx="150" cy="280" r="2.6" fill="#d4a548"/>
+              <circle cx="210" cy="310" r="1.4" fill="#e6c98a"/>
+              <circle cx="270" cy="290" r="2.2" fill="#d4a548"/>
+              <circle cx="320" cy="320" r="1.8" fill="#c1432b"/>
+              <circle cx="100" cy="360" r="2" fill="#e6c98a"/>
+              <circle cx="170" cy="380" r="1.5" fill="#d4a548"/>
+              <circle cx="230" cy="370" r="2.3" fill="#e6c98a"/>
+              <circle cx="290" cy="400" r="1.7" fill="#d4a548"/>
+              <circle cx="80" cy="120" r="1.4" fill="#c1432b"/>
+              <circle cx="140" cy="140" r="1.2" fill="#e6c98a"/>
+              <circle cx="200" cy="120" r="1.6" fill="#d4a548"/>
+              <circle cx="280" cy="150" r="1.3" fill="#e6c98a"/>
+              <circle cx="350" cy="180" r="1.8" fill="#d4a548"/>
+              <circle cx="60" cy="240" r="1.5" fill="#c1432b"/>
+              <circle cx="340" cy="280" r="1.4" fill="#e6c98a"/>
+              <circle cx="50" cy="380" r="1.3" fill="#d4a548"/>
+              <circle cx="370" cy="400" r="1.5" fill="#c1432b"/>
+              <circle cx="120" cy="430" r="1.4" fill="#e6c98a"/>
+              <circle cx="250" cy="440" r="1.6" fill="#d4a548"/>
+              <!-- small dust -->
+              <g opacity="0.5">
+                <circle cx="195" cy="245" r=".7" fill="#fff5d8"/>
+                <circle cx="225" cy="265" r=".5" fill="#fff5d8"/>
+                <circle cx="165" cy="220" r=".6" fill="#fff5d8"/>
+                <circle cx="305" cy="335" r=".7" fill="#fff5d8"/>
+                <circle cx="135" cy="320" r=".5" fill="#fff5d8"/>
+                <circle cx="255" cy="200" r=".6" fill="#fff5d8"/>
+                <circle cx="190" cy="160" r=".4" fill="#fff5d8"/>
+                <circle cx="285" cy="220" r=".5" fill="#fff5d8"/>
+                <circle cx="115" cy="260" r=".6" fill="#fff5d8"/>
+                <circle cx="325" cy="380" r=".7" fill="#fff5d8"/>
+              </g>
+              <!-- horizontal lines (artist's overlay) -->
+              <line x1="0" y1="280" x2="400" y2="280" stroke="#c8a558" stroke-width="0.3" opacity="0.4"/>
+              <line x1="0" y1="282" x2="400" y2="282" stroke="#c8a558" stroke-width="0.15" opacity="0.3"/>
+            </svg>
+          </div>
+          <span class="corner tl"></span><span class="corner tr"></span>
+          <span class="corner bl"></span><span class="corner br"></span>
+        </div>
+        <div class="plaque">
+          <span class="title-it">Pollen Index, 2026</span>
+          <span>YT · MJ × GBS</span>
+        </div>
+      </div>
+
+      <div class="deep-side">
+
+        <div class="prompt-card">
+          <div class="lbl"><span>The Prompt — final pass</span><span>v.014</span></div>
+          <div class="pmt">
+            "<mark>a field of yellow</mark> <span class="strike">flowers in late spring,</span> <span class="ins">pollen suspended midair,</span> golden hour, <mark>shallow depth,</mark> grainy 35mm, <span class="strike">cinematic</span> <span class="ins">elegiac, like a Tarkovsky still,</span> dust motes catching <mark>the last good light</mark>"
+          </div>
+          <div class="seed">
+            <span>SEED 0x7f3a · MJ_V11.2 · oct-15-2025</span>
+            <span>142 generations · 1 selected</span>
+          </div>
+        </div>
+
+        <div class="edits">
+          <div class="edit-row">
+            <div class="edit-num">01</div>
+            <div class="edit-body">
+              <div class="when">2026·02·08 · 14:22 KST</div>
+              <div class="what">Cropped <em>38% from the bottom</em> — removed the horizon line. The work refused to be a landscape and became an <em>index</em>.</div>
+            </div>
+          </div>
+          <div class="edit-row">
+            <div class="edit-num">02</div>
+            <div class="edit-body">
+              <div class="when">2026·02·11 · 09:47 KST</div>
+              <div class="what">Hue rotation +14° on the vermilion grains. They wanted to read as <em>blood</em>; they should read as <em>pollen at dusk</em>.</div>
+            </div>
+          </div>
+          <div class="edit-row">
+            <div class="edit-num">03</div>
+            <div class="edit-body">
+              <div class="when">2026·02·14 · 16:03 KST</div>
+              <div class="what">Hand-painted dust motes — twelve of them, in a thin gold acrylic, scanned and overlaid at 38% opacity. Only the <em>twelve</em> are the work; the AI did the rest.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mint">
+          <div class="cell"><div class="k">Edition</div><div class="v"><em>7</em> / 7 minted</div></div>
+          <div class="cell"><div class="k">Artist Proofs</div><div class="v">2 / 2 retained</div></div>
+          <div class="cell"><div class="k">Format</div><div class="v">2K + signed archival print</div></div>
+          <div class="cell"><div class="k">Reserve</div><div class="v">Ξ <em>2.4</em></div></div>
+          <div class="cell"><div class="k">Last sale</div><div class="v">Ξ 3.1 · 04·09·2026</div></div>
+          <div class="cell"><div class="k">Holder</div><div class="v">0x14a..f02</div></div>
+          <div class="cell" style="grid-column:1 / -1;border-right:none"><div class="k">Token URI · provenance hash</div><div class="v mono">ipfs://bafy…pollen037 · sha256:c41f3a8e9b7d2a5fbe…0xpollen.eth</div></div>
+        </div>
+
+        <div class="provenance">
+          <div class="lbl">Provenance trace · the chain of becoming</div>
+          <div class="prov-chain">
+            <div class="prov-node">
+              <div class="t">01 · seed</div>
+              <div class="n">A photograph of cedar pollen, Kyoto, 2024.</div>
+              <div class="h">photo_yt_038.tif</div>
+            </div>
+            <span class="prov-arr">→</span>
+            <div class="prov-node">
+              <div class="t">02 · model</div>
+              <div class="n">MidJourney V11.2 · 142 iter.</div>
+              <div class="h">seed 0x7f3a</div>
+            </div>
+            <span class="prov-arr">→</span>
+            <div class="prov-node">
+              <div class="t">03 · edit</div>
+              <div class="n">Three artist passes, hand-painted overlay.</div>
+              <div class="h">edits_v014.psd</div>
+            </div>
+            <span class="prov-arr">→</span>
+            <div class="prov-node">
+              <div class="t">04 · mint</div>
+              <div class="n">Ed. 1–7, minted 04·06·2026.</div>
+              <div class="h">tx 0xa9c2…41ef</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="essay">
+      <div class="meta">
+        Curator's note<br><br>
+        <span>Han Liang</span><br>
+        Director of Programs<br><br>
+        2026 · 04 · 14<br>
+        Shanghai
+      </div>
+      <div class="essay-body">
+        <p><span class="dropcap">T</span>he question of <em>Pollen Index</em> is not whether the machine made it. The machine made hundreds. The question is which hundred-and-forty-second the artist kept, which thirty-eight percent she cut, and why a horizon line, once removed, becomes a kind of dictionary entry.</p>
+        <p>Tanaka does not hide the model. She does not disguise her edits. She publishes both, alongside the work, in the manner that a 17th-century printmaker would publish the plate and the press. The artifact is not the image — it is the <em>full trace</em>: the photograph from Kyoto, the prompt rewritten fourteen times, the cropping decision, the twelve gold dots painted at three in the morning. Each step is visible. Each step is part of the work.</p>
+        <p>This is what Ostraka exists to make legible. An ostrakon, in ancient Athens, was a fragment of pottery on which a citizen would inscribe a name — a vote, a memory, a small act of authorship. Our gallery returns to that gesture: <em>every work, named and traced; every collaborator, visible.</em></p>
+        <p>Pollen Index sold its first edition in eleven minutes. The artist requested that the second edition be held for two months. We have honoured that request.</p>
+        <div class="sig">Han Liang · for the Studio</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- section head: roster -->
+<div class="shead" id="roster">
+  <span class="num">§ 03</span>
+  <span>The Roster — Twelve Artists, Spring 2026</span>
+  <div class="line"></div>
+  <span class="right">12 / 41 IN ROSTER</span>
+</div>
+
+<!-- gallery wall (white) -->
+<section class="wall">
+  <div class="container">
+    <div class="eyebrow">The gallery wall · step into the lit room</div>
+    <h2>Spring roster, <em>twelve hands</em>.</h2>
+    <p class="sub">Each artist works in a continuous studio dialogue with one or more models. None of them work alone, and none of them defer.</p>
+
+    <div class="roster">
+      <!-- 12 portraits -->
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:radial-gradient(circle at 40% 40%,#c1432b 0,#8a2a18 40%,#3a1208 80%);"></div></div>
+        <div class="name">Yuki <em>Tanaka</em></div>
+        <div class="meta"><span>KYOTO · JP</span><span class="dot">●  Live</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:repeating-linear-gradient(135deg,#2c3a6b 0,#2c3a6b 8px,#1a2545 8px,#1a2545 12px);"></div></div>
+        <div class="name">Moyo <em>Adeyemi</em></div>
+        <div class="meta"><span>LAGOS · NG</span><span>Ed. of 3</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:radial-gradient(ellipse at 50% 60%,#5a6b3a 0,#2a3a18 60%,#0d1505 100%);"></div></div>
+        <div class="name">Eitan <em>Reuven</em></div>
+        <div class="meta"><span>TEL AVIV · IL</span><span>Unique</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:repeating-linear-gradient(0deg,transparent 0,transparent 6px,rgba(10,9,7,.4) 7px),linear-gradient(180deg,#e8dfcc,#d2c7af);"></div></div>
+        <div class="name">Park <em>So-young</em></div>
+        <div class="meta"><span>SEOUL · KR</span><span class="dot">●  Live</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:conic-gradient(from 120deg at 50% 50%,#c8a558,#8a6a2a,#c8a558,#5a4218,#c8a558);"></div></div>
+        <div class="name">Lila <em>Marchetti</em></div>
+        <div class="meta"><span>MILANO · IT</span><span>Ed. of 7</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:linear-gradient(135deg,#0d1530,#2c3a6b 40%,#e6c98a 100%);"></div></div>
+        <div class="name">Chukwu <em>Okeke</em></div>
+        <div class="meta"><span>BERLIN · DE</span><span>Ed. of 12</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:radial-gradient(circle at 30% 30%,#fff5d8 0,#e8dfcc 20%,#8a7a5a 80%);"></div></div>
+        <div class="name">Aiko <em>Mori</em></div>
+        <div class="meta"><span>OSAKA · JP</span><span>Unique</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:repeating-linear-gradient(90deg,#1a1612 0,#1a1612 14px,#3a2a18 14px,#3a2a18 18px,#5a4218 18px,#5a4218 22px);"></div></div>
+        <div class="name">Dario <em>Quispe</em></div>
+        <div class="meta"><span>LIMA · PE</span><span>Ed. of 5</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:radial-gradient(ellipse at 50% 80%,#c1432b 0,#5a1a08 50%,#1a0805 100%);"></div></div>
+        <div class="name">Ines <em>Beaumont</em></div>
+        <div class="meta"><span>MARSEILLE · FR</span><span class="dot">●  Live</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:linear-gradient(180deg,#e8dfcc 0%,#e8dfcc 45%,#1a1612 45%,#1a1612 55%,#e8dfcc 55%);"></div></div>
+        <div class="name">Hong <em>Wei</em></div>
+        <div class="meta"><span>HANGZHOU · CN</span><span>Ed. of 8</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:radial-gradient(circle at 70% 30%,#9bb78a 0,#5a6b3a 40%,#2a3a18 80%);"></div></div>
+        <div class="name">Mara <em>Lindqvist</em></div>
+        <div class="meta"><span>STOCKHOLM · SE</span><span>Ed. of 4</span></div>
+      </div>
+      <div class="artist">
+        <div class="portrait"><div class="p-art" style="background:conic-gradient(from 0deg,#1a1612,#3a2a18,#1a1612,#c1432b,#1a1612);"></div></div>
+        <div class="name">Sami <em>Karimi</em></div>
+        <div class="meta"><span>TEHRAN · IR</span><span>Unique</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="floor"></div>
+</section>
+
+<!-- section head: cta -->
+<div class="shead">
+  <span class="num">§ 04</span>
+  <span>For Collectors · For Artists</span>
+  <div class="line"></div>
+  <span class="right">Two doors. Same room.</span>
+</div>
+
+<!-- CTA split -->
+<section class="cta">
+  <div class="cta-half" id="collectors">
+    <div class="stamp">→ for collectors</div>
+    <div>
+      <h3>Acquire a <em>traced</em> work.</h3>
+      <p class="desc">Every Ostraka edition arrives with its full provenance: the photograph, the prompts, the edit history, the curator's note. You are not buying an image. You are buying its <em>becoming</em>.</p>
+    </div>
+    <a class="arrow" href="#">Apply to the collector list
+      <svg width="22" height="10" viewBox="0 0 22 10" fill="none"><path d="M1 5h20m0 0L17 1m4 4l-4 4" stroke="currentColor" stroke-width="1"/></svg>
+    </a>
+  </div>
+  <div class="cta-half" id="artists">
+    <div class="stamp">→ for artists</div>
+    <div>
+      <h3>Be in the <em>roster</em>.</h3>
+      <p class="desc">We accept twelve new artists per season. Submit one work, the prompt that birthed it, and the three edits you made. We read every submission. We answer in <em>under fourteen days</em>.</p>
+    </div>
+    <a class="arrow" href="#">Submit a work
+      <svg width="22" height="10" viewBox="0 0 22 10" fill="none"><path d="M1 5h20m0 0L17 1m4 4l-4 4" stroke="currentColor" stroke-width="1"/></svg>
+    </a>
+  </div>
+</section>
+
+<!-- footer -->
+<footer>
+  <div class="row">
+    <div>
+      <div class="brand">Ostraka.</div>
+      <p class="credo">A gallery of works where the prompt is the artifact, the trace is the lineage, and the human hand is everywhere visible.</p>
+    </div>
+    <div>
+      <h4>Gallery</h4>
+      <ul><li><a>Featured</a></li><li><a>Roster</a></li><li><a>Archive</a></li><li><a>Editions</a></li></ul>
+    </div>
+    <div>
+      <h4>Process</h4>
+      <ul><li><a>The Trace Standard</a></li><li><a>Models we work with</a></li><li><a>Provenance ledger</a></li><li><a>Manifesto</a></li></ul>
+    </div>
+    <div>
+      <h4>Studio</h4>
+      <ul><li><a>About Globsense</a></li><li><a>Curators</a></li><li><a>Press</a></li><li><a>Contact</a></li></ul>
+    </div>
+  </div>
+  <div class="baseline">
+    <span>© Ostraka Studio · MMXXVI · A Globsense Property</span>
+    <span>Shanghai · Tokyo · Lagos · Marseille</span>
+    <span>v.0.7 · 04·14·2026</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,9 +1,33 @@
 {
-  "status": "pending",
-  "worker_model": null,
+  "id": "05-ostraka",
+  "name": "Ostraka",
+  "tagline": "where the prompt becomes the artifact",
+  "status": "shipped",
+  "worker_model": "claude-sonnet-4-6-thinking",
   "session_url": null,
-  "updated_at": "2026-06-28T12:21:23.799241Z",
+  "updated_at": "2026-06-28T15:38:00Z",
   "build_time_seconds": null,
-  "needs_review": false,
-  "notes": ""
+  "needs_review": true,
+  "needs_deploy": false,
+  "deployed": true,
+  "deploy_targets": {
+    "github": "https://astronaut2424.github.io/globsense-05-ostraka/",
+    "natapp": "https://da33a9b8.natappfree.cc/reel/05-ostraka/"
+  },
+  "files": ["index.html", "_brief.md", "_status.json"],
+  "entry": "index.html",
+  "model": "claude-sonnet-4-6-thinking",
+  "built_at": "2026-04-14",
+  "deployed_at": "2026-06-28T15:38:00Z",
+  "aesthetic": "editorial-dark-gallery-with-white-wall",
+  "type": "fictional-platform",
+  "category": "gen-art-gallery-and-mint",
+  "sections": [
+    "hero-corridor",
+    "featured-tiles-with-process-trace",
+    "deep-dive-pollen-index",
+    "roster-gallery-wall-white",
+    "cta-split-collectors-artists"
+  ],
+  "notes": "Deployed 2026-06-28 via per-project gh repo. Live on GitHub Pages + natapp mirror."
 }
