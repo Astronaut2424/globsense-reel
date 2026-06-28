@@ -1,7 +1,6 @@
 **Build project #01 Globsense Landing**
 
-Model: `kimi-k2.7-code` (Kimi) — set in WebUI dropdown
-Provider: `kimi-cn` or `openai-next` (whichever has this model)
+Model: `claude-sonnet-4-6-thinking` (Claude) — set in WebUI dropdown
 
 1. Read the brief: `/opt/data/home/globsense/prototypes/globsense-reel/_docs/briefs/01-landing.md`
 2. Read the tokens: `/opt/data/home/globsense/prototypes/globsense-reel/_shared/tokens.css`
@@ -13,7 +12,7 @@ Provider: `kimi-cn` or `openai-next` (whichever has this model)
    - Mobile-first, no console errors.
 5. Write `/opt/data/home/globsense/prototypes/globsense-reel/01-landing/_brief.md` — your interpretation + design rationale
 6. Write `/opt/data/home/globsense/prototypes/globsense-reel/01-landing/_status.json`:
-   `{"status":"built","worker_model":"kimi-k2.7-code","needs_deploy":true,"updated_at":"<ISO UTC>"}`
+   `{"status":"built","worker_model":"claude-sonnet-4-6-thinking","needs_deploy":true,"updated_at":"<ISO UTC>"}`
 7. Report: one paragraph — what you built, what's elegant, what to improve.
 
 DO NOT: run terminal commands, push to git, deploy, or touch other folders.

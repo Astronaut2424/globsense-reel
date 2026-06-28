@@ -12,9 +12,9 @@
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": "kimi-k2.7-code",
+      "model": "claude-sonnet-4-6-thinking",
       "tagline": "Globsense.com revamp \u2014 one-shot redesign of our own site.",
-      "provider": "kimi"
+      "provider": "claude"
     },
     {
       "n": 2,
@@ -138,6 +138,6 @@
       "provider": "kimi"
     }
   ],
-  "last_sync": "2026-06-28T14:54:07.301256Z",
+  "last_sync": "2026-06-28T15:03:10.853073Z",
   "deploy_model": "minimax-m3"
 }
