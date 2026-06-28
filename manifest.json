@@ -12,8 +12,9 @@
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": "deepseek-v4-flash",
-      "tagline": "Globsense.com revamp \u2014 one-shot redesign of our own site."
+      "model": "kimi-k2.7-code",
+      "tagline": "Globsense.com revamp \u2014 one-shot redesign of our own site.",
+      "provider": "kimi"
     },
     {
       "n": 2,
@@ -22,8 +23,9 @@
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.4",
-      "tagline": "Auto-video pipeline: AI gen + real footage, edited by AI."
+      "model": "kimi-k2.6",
+      "tagline": "Auto-video pipeline: AI gen + real footage, edited by AI.",
+      "provider": "kimi"
     },
     {
       "n": 3,
@@ -33,7 +35,8 @@
       "real": false,
       "status": "pending",
       "model": "claude-sonnet-4-6-thinking",
-      "tagline": "A Chinese tea house, voice-led, opening in Mayfair."
+      "tagline": "A Chinese tea house, voice-led, opening in Mayfair.",
+      "provider": "claude"
     },
     {
       "n": 4,
@@ -43,7 +46,8 @@
       "real": false,
       "status": "pending",
       "model": "gpt-5.3-codex",
-      "tagline": "AI dermatologist generates your custom serum, label, and story."
+      "tagline": "AI dermatologist generates your custom serum, label, and story.",
+      "provider": "codex"
     },
     {
       "n": 5,
@@ -53,7 +57,8 @@
       "real": false,
       "status": "pending",
       "model": "claude-sonnet-4-6-thinking",
-      "tagline": "Generative-art gallery. AI \u00d7 human, minted and exhibited."
+      "tagline": "Generative-art gallery. AI \u00d7 human, minted and exhibited.",
+      "provider": "claude"
     },
     {
       "n": 6,
@@ -62,8 +67,9 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.4-mini",
-      "tagline": "The video-gen inference layer for the next decade of cinema."
+      "model": "glm-5.1",
+      "tagline": "The video-gen inference layer for the next decade of cinema.",
+      "provider": "glm"
     },
     {
       "n": 7,
@@ -73,7 +79,8 @@
       "real": false,
       "status": "pending",
       "model": "claude-sonnet-4-6-thinking",
-      "tagline": "Drag to paint. AI completes your scroll."
+      "tagline": "Drag to paint. AI completes your scroll.",
+      "provider": "claude"
     },
     {
       "n": 8,
@@ -82,8 +89,9 @@
       "kind": "mini-game",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.4",
-      "tagline": "Divination, generated. Mingxi universe expansion."
+      "model": "kimi-k2.6",
+      "tagline": "Divination, generated. Mingxi universe expansion.",
+      "provider": "kimi"
     },
     {
       "n": 9,
@@ -92,8 +100,9 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "deepseek-v4-flash",
-      "tagline": "A creators' platform for the world's best drone makers."
+      "model": "glm-5.2",
+      "tagline": "A creators' platform for the world's best drone makers.",
+      "provider": "glm"
     },
     {
       "n": 10,
@@ -102,8 +111,9 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "deepseek-v4-flash",
-      "tagline": "Premium ownership for a fictional BYD halo model."
+      "model": "glm-5.2",
+      "tagline": "Premium ownership for a fictional BYD halo model.",
+      "provider": "glm"
     },
     {
       "n": 11,
@@ -112,8 +122,9 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "gpt-5.4",
-      "tagline": "The collector's vault: 3D shelf, AI hunter, trade graph."
+      "model": "kimi-k2.7-code",
+      "tagline": "The collector's vault: 3D shelf, AI hunter, trade graph.",
+      "provider": "kimi"
     },
     {
       "n": 12,
@@ -122,9 +133,11 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "gpt-5.4",
-      "tagline": "London flagship. AI pairings for Western palates."
+      "model": "kimi-k2.6",
+      "tagline": "London flagship. AI pairings for Western palates.",
+      "provider": "kimi"
     }
   ],
-  "last_sync": "2026-06-28T14:41:52.117423Z"
+  "last_sync": "2026-06-28T14:54:07.301256Z",
+  "deploy_model": "minimax-m3"
 }
