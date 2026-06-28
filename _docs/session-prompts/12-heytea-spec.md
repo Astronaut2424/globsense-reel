@@ -5,16 +5,17 @@ The orchestrator already built the scaffolding. Your job: BUILD into your
 assigned folder, LOCAL-TEST, PUSH to GitHub, OPTIONALLY deploy to Vercel
 if heavy, then update `_status.json`. Self-sufficient end-to-end.
 
-**Recommended model**: claude-opus-4-7 (set in WebUI dropdown)
-**Alternate**: claude-opus-4-6-thinking (slower, deeper)
+**Model for this project**: `gemini-2.5-pro` (set this in the WebUI dropdown,
+under the `openai-next` provider)
+**Tier**: Standard — Bilingual EN/CN. Gemini-2.5-pro is strong at multilingual. (est. ~$3)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/12-heytea-spec/`
 
 **Read FIRST, before writing any code**:
-1. `/opt/data/home/globsense/prototypes/globsense-reel/_docs/brief-contract.md` — done-bar
-2. `/opt/data/home/globsense/prototypes/globsense-reel/_shared/tokens.css` — import; don't redefine
-3. `/opt/data/home/globsense/prototypes/globsense-reel/_docs/vercel-fallback.md` — when/how to use Vercel
+1. `/opt/data/home/globsense/prototypes/globsense-reel/_docs/brief-contract.md`
+2. `/opt/data/home/globsense/prototypes/globsense-reel/_shared/tokens.css`
+3. `/opt/data/home/globsense/prototypes/globsense-reel/_docs/vercel-fallback.md`
 4. `/opt/data/home/globsense/brain/narrative/` — Globsense voice + manifesto
 5. `/opt/data/home/globsense/brain/frameworks/` — frame control method
 6. `/opt/data/home/globsense/design-system/DESIGN.md` — brand notes
@@ -55,8 +56,8 @@ Otherwise skip — natapp + GitHub Pages is enough.
 ```bash
 cd /opt/data/home/globsense/prototypes/globsense-reel/
 git add -A
-git commit -m "feat(heytea-spec): <replace with a real summary>"
-git push origin main  # uses gh auth, configured by orchestrator
+git commit -m "feat(heytea-spec): build complete"
+git push origin main
 ```
 If push fails because gh isn't authed, REPORT it to the user with the
 exact command they need to run, then wait. Don't loop.
@@ -66,12 +67,12 @@ Write to `_status.json` (in your folder):
 ```json
 {
   "status": "built",
-  "worker_model": "<the model you're running as, from openai-next>",
+  "worker_model": "gemini-2.5-pro",
   "session_url": null,
   "updated_at": "<ISO 8601 UTC>",
   "build_time_seconds": <number>,
   "needs_review": true,
-  "notes": "<one short paragraph: what's elegant, what would benefit from a second pass>",
+  "notes": "<one short paragraph>",
   "deploy_targets": {
     "natapp": "https://<current-natapp>.natappfree.cc/reel/12-heytea-spec/",
     "github_pages": "https://astronaut2424.github.io/globsense-reel/12-heytea-spec/",
@@ -79,23 +80,16 @@ Write to `_status.json` (in your folder):
   }
 }
 ```
-(Set `vercel` to the URL if you deployed there.)
-
-Get the natapp domain via:
-```bash
-curl -s http://127.0.0.1:4040/http/in -L | grep -oE '[a-z0-9]+\.natappfree\.cc' | head -1
-```
 
 ### Phase 6 — Report
 Drop a one-paragraph summary to the user: what you built, what's elegant
 about it, what a second pass would improve, and the 2 or 3 live URLs.
 
 **Do NOT**:
-- Touch other project folders (`01-lab/`, etc. — only YOUR folder)
+- Touch other project folders
 - Modify `manifest.json` or any `_shared/` files
-- Run `./deploy.sh` from your worker session — orchestrator owns that for batch ops
-- Stop and ask the user mid-build unless the brief is incoherent. Make a
-  call, document it in `_brief.md`, keep building.
+- Run `./deploy.sh` — orchestrator owns that
+- Stop and ask the user mid-build unless the brief is incoherent.
 
 ---
 

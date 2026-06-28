@@ -7,13 +7,13 @@
   "projects": [
     {
       "n": 1,
-      "slug": "lab",
-      "name": "Globsense Lab",
+      "slug": "gaas",
+      "name": "Globsense Platform (GaaS)",
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": null,
-      "tagline": "An experimental playground of AI-native micro-tools."
+      "model": "claude-opus-4-7",
+      "tagline": "Every service we offer, productized into one AI-native platform."
     },
     {
       "n": 2,
@@ -22,7 +22,7 @@
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5.3-codex",
       "tagline": "Auto-video pipeline: AI gen + real footage, edited by AI."
     },
     {
@@ -32,7 +32,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "claude-sonnet-4-6-thinking",
       "tagline": "A Chinese tea house, voice-led, opening in Mayfair."
     },
     {
@@ -42,7 +42,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gemini-3-pro-preview",
       "tagline": "AI dermatologist generates your custom serum, label, and story."
     },
     {
@@ -52,7 +52,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5.5",
       "tagline": "Generative-art gallery. AI \u00d7 human, minted and exhibited."
     },
     {
@@ -62,7 +62,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5.4-pro",
       "tagline": "The video-gen inference layer for the next decade of cinema."
     },
     {
@@ -72,7 +72,7 @@
       "kind": "mini-game",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5-mini",
       "tagline": "Drag to paint. AI completes your scroll."
     },
     {
@@ -82,7 +82,7 @@
       "kind": "mini-game",
       "real": false,
       "status": "pending",
-      "model": null,
+      "model": "gemini-2.5-flash",
       "tagline": "Divination, generated. Mingxi universe expansion."
     },
     {
@@ -92,7 +92,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": null,
+      "model": "grok-4.1",
       "tagline": "A creators' platform for the world's best drone makers."
     },
     {
@@ -102,7 +102,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5.4",
       "tagline": "Premium ownership for a fictional BYD halo model."
     },
     {
@@ -112,7 +112,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": null,
+      "model": "gpt-5.2-codex",
       "tagline": "The collector's vault: 3D shelf, AI hunter, trade graph."
     },
     {
@@ -122,9 +122,9 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": null,
+      "model": "gemini-2.5-pro",
       "tagline": "London flagship. AI pairings for Western palates."
     }
   ],
-  "last_sync": "2026-06-28T12:39:26.144203Z"
+  "last_sync": "2026-06-28T14:03:19.123134Z"
 }
