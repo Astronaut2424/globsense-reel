@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gemini-2.5-flash` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Text-generation mini-game. (est. ~$1)
+**Tier**: Standard (Gemini) — Text-generation mini-game. (est. ~$1)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/08-tea-leaves/`

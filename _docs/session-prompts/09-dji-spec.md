@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `grok-4.1` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Cinematic creator brand. (est. ~$4)
+**Tier**: Standard (Grok) — Cinematic creator brand. (est. ~$4)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/09-dji-spec/`

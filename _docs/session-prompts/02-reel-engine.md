@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gpt-5.3-codex` (set in WebUI dropdown, `openai-next`)
-**Tier**: Premium — Code-heavy pipeline demo. Codex excels. (est. ~$5-8)
+**Tier**: Standard (Codex) — Code-heavy pipeline. Codex excels at logic. (est. ~$5-8)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/02-reel-engine/`

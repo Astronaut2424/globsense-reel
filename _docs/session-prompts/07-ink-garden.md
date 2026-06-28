@@ -4,8 +4,8 @@ You are the CREATIVE session for ONE project. Your ONLY job: generate
 beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
-**Model for this project**: `gpt-5-mini` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Simple canvas mechanic. (est. ~$1)
+**Model for this project**: `claude-sonnet-4-6-thinking` (set in WebUI dropdown, `openai-next`)
+**Tier**: Premium (Claude) — Meditative painting game. Beauty IS the product. (est. ~$7-10)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/07-ink-garden/`
@@ -52,7 +52,7 @@ Write `_status.json`:
 ```json
 {
   "status": "built",
-  "worker_model": "gpt-5-mini",
+  "worker_model": "claude-sonnet-4-6-thinking",
   "needs_deploy": true,
   "updated_at": "<ISO 8601 UTC>",
   "notes": "Creative phase complete. Awaiting deployment session."

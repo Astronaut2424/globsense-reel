@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gemini-3-pro-preview` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Visual reasoning + generative brand. (est. ~$3)
+**Tier**: Standard (Gemini) — Visual reasoning + generative brand. (est. ~$3)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/04-linfen/`

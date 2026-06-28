@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gpt-5.2-codex` (set in WebUI dropdown, `openai-next`)
-**Tier**: Premium — 3D shelf + AI agent. (est. ~$4-6)
+**Tier**: Standard (Codex) — 3D shelf + AI agent interactions. (est. ~$4-6)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/11-popmart-spec/`

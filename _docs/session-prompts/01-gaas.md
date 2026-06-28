@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `claude-opus-4-7` (set in WebUI dropdown, `openai-next`)
-**Tier**: Premium — VC pitch piece. Spare no expense. (est. ~$15-20)
+**Tier**: Premium (Claude) — VC pitch piece. Opus for maximum quality. (est. ~$15-20)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/01-gaas/`

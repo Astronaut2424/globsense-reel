@@ -52,7 +52,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.5",
+      "model": "claude-sonnet-4-6-thinking",
       "tagline": "Generative-art gallery. AI \u00d7 human, minted and exhibited."
     },
     {
@@ -72,7 +72,7 @@
       "kind": "mini-game",
       "real": false,
       "status": "pending",
-      "model": "gpt-5-mini",
+      "model": "claude-sonnet-4-6-thinking",
       "tagline": "Drag to paint. AI completes your scroll."
     },
     {
@@ -126,5 +126,5 @@
       "tagline": "London flagship. AI pairings for Western palates."
     }
   ],
-  "last_sync": "2026-06-28T14:03:19.123134Z"
+  "last_sync": "2026-06-28T14:25:20.481663Z"
 }

@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gemini-2.5-pro` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Bilingual EN/CN. (est. ~$3)
+**Tier**: Standard (Gemini) — Bilingual EN/CN. (est. ~$3)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/12-heytea-spec/`

@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `claude-sonnet-4-6-thinking` (set in WebUI dropdown, `openai-next`)
-**Tier**: Premium — Signature cinematic. Sonnet 60% cheaper than Opus. (est. ~$7-10)
+**Tier**: Premium (Claude) — Signature cinematic. Sonnet-thinking for design depth. (est. ~$7-10)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/03-mingxi/`

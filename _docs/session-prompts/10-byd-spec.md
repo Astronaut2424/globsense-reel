@@ -5,7 +5,7 @@ beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
 **Model for this project**: `gpt-5.4` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard — Calm luxury. (est. ~$3)
+**Tier**: Standard (GPT) — Calm luxury. (est. ~$3)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/10-byd-spec/`
