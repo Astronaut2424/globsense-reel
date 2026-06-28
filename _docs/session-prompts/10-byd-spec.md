@@ -4,8 +4,8 @@ You are the CREATIVE session for ONE project. Your ONLY job: generate
 beautiful code into the assigned folder. You do NOT deploy, test, push,
 or update status. A separate DEPLOY session (cheaper model) handles that.
 
-**Model for this project**: `gpt-5.4` (set in WebUI dropdown, `openai-next`)
-**Tier**: Standard (GPT) — Calm luxury. (est. ~$3)
+**Model for this project**: `deepseek-v4-flash` (set in WebUI dropdown)
+**Tier**: Cheap (Chinese) —  (est. ~$0.5)
 
 **Your sole working directory**:
 `/opt/data/home/globsense/prototypes/globsense-reel/10-byd-spec/`
@@ -13,7 +13,6 @@ or update status. A separate DEPLOY session (cheaper model) handles that.
 **Read FIRST** (quick skim, don't burn tokens re-reading):
 1. `/opt/data/home/globsense/prototypes/globsense-reel/_shared/tokens.css` — import these
 2. `/opt/data/home/globsense/brain/narrative/` — Globsense voice (skim only)
-3. `/opt/data/home/globsense/design-system/DESIGN.md` — brand notes (skim only)
 
 **Hard rules**:
 - Self-contained folder: `index.html` + `style.css` + `script.js` + `assets/`
@@ -30,36 +29,22 @@ Write `index.html`, `style.css`, `script.js`, plus any `assets/` INTO
 `/opt/data/home/globsense/prototypes/globsense-reel/10-byd-spec/`.
 
 ### Step 2 — Document
-Write `_brief.md` in the same folder:
-```markdown
-# BYD Halo Experience — Creative Brief Interpretation
-
-## What I built
-<2-3 sentences>
-
-## Design rationale
-<2-3 sentences on WHY these choices>
-
-## The AI moment
-<which part dramatizes AI-native, and how>
-
-## What a second pass would improve
-<1-2 sentences of honest self-critique>
-```
+Write `_brief.md` in the same folder with: what you built, design rationale,
+the AI moment, what a second pass would improve.
 
 ### Step 3 — Mark for deployment
 Write `_status.json`:
 ```json
 {
   "status": "built",
-  "worker_model": "gpt-5.4",
+  "worker_model": "deepseek-v4-flash",
   "needs_deploy": true,
   "updated_at": "<ISO 8601 UTC>",
   "notes": "Creative phase complete. Awaiting deployment session."
 }
 ```
 
-### Step 4 — Report to user
+### Step 4 — Report
 One short paragraph: what you built, what's elegant, what could improve.
 Then say: **"Creative phase done. Open a deploy session (cheap model)
 to ship this."**
@@ -69,7 +54,6 @@ to ship this."**
 - Push to GitHub
 - Modify `manifest.json` or `_shared/` files
 - Touch other project folders
-- Run `deploy.sh`
 
 Your tokens are for CREATIVE WORK ONLY. Stop after Step 4.
 

@@ -7,13 +7,13 @@
   "projects": [
     {
       "n": 1,
-      "slug": "gaas",
-      "name": "Globsense Platform (GaaS)",
+      "slug": "landing",
+      "name": "Globsense Landing",
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": "claude-opus-4-7",
-      "tagline": "Every service we offer, productized into one AI-native platform."
+      "model": "deepseek-v4-flash",
+      "tagline": "Globsense.com revamp \u2014 one-shot redesign of our own site."
     },
     {
       "n": 2,
@@ -22,7 +22,7 @@
       "kind": "studio-ip",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.3-codex",
+      "model": "gpt-5.4",
       "tagline": "Auto-video pipeline: AI gen + real footage, edited by AI."
     },
     {
@@ -42,7 +42,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": "gemini-3-pro-preview",
+      "model": "gpt-5.3-codex",
       "tagline": "AI dermatologist generates your custom serum, label, and story."
     },
     {
@@ -62,7 +62,7 @@
       "kind": "fictional",
       "real": false,
       "status": "pending",
-      "model": "gpt-5.4-pro",
+      "model": "gpt-5.4-mini",
       "tagline": "The video-gen inference layer for the next decade of cinema."
     },
     {
@@ -82,7 +82,7 @@
       "kind": "mini-game",
       "real": false,
       "status": "pending",
-      "model": "gemini-2.5-flash",
+      "model": "gpt-5.4",
       "tagline": "Divination, generated. Mingxi universe expansion."
     },
     {
@@ -92,7 +92,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "grok-4.1",
+      "model": "deepseek-v4-flash",
       "tagline": "A creators' platform for the world's best drone makers."
     },
     {
@@ -102,7 +102,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "gpt-5.4",
+      "model": "deepseek-v4-flash",
       "tagline": "Premium ownership for a fictional BYD halo model."
     },
     {
@@ -112,7 +112,7 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "gpt-5.2-codex",
+      "model": "gpt-5.4",
       "tagline": "The collector's vault: 3D shelf, AI hunter, trade graph."
     },
     {
@@ -122,9 +122,9 @@
       "kind": "real-spec",
       "real": true,
       "status": "pending",
-      "model": "gemini-2.5-pro",
+      "model": "gpt-5.4",
       "tagline": "London flagship. AI pairings for Western palates."
     }
   ],
-  "last_sync": "2026-06-28T14:25:20.481663Z"
+  "last_sync": "2026-06-28T14:41:52.117423Z"
 }
